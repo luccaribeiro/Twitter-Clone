@@ -12,8 +12,9 @@
 .cabecalho__menuNavegacao ul li{
     list-style: none;
 }
-
-
+.cabecalho__logo img{
+    max-width: 26px;
+}
 .cabecalho__menuItem{
     margin-bottom: 25px;
 }
