@@ -12,9 +12,7 @@
 .cabecalho__menuNavegacao ul li{
     list-style: none;
 }
-.cabecalho__logo figcaption{
-    display: none;
-}
+
 
 .cabecalho__menuItem{
     margin-bottom: 25px;
