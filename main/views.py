@@ -42,3 +42,8 @@ def logout_request(request):
 
 def homepage(request):
 	return render(request, 'main/homepage.html')
+
+
+# Queryset para encontrar o nome do usuário a partir do login criado pelo Lucca
+#	from django.contrib.auth.models import User
+#	username = User.objects.filter(username='Gabriel')
