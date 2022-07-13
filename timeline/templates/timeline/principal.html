@@ -1,0 +1,86 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'princip.css'%}">
+    <title>Clone</title>
+</head>
+<body>
+    <div class="container">
+
+        <!-- CABEÇALHO -->
+        <header class="cabecalho">
+
+            <!-- IMAGEM LOGO -->
+            <figure class="cabecalho__logo">
+                <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi"> 
+            </figure>
+
+            <!-- MENU DE NAVEGAÇÃO -->
+            <nav class="cabecalho__menuNavegacao">
+
+                <!-- LISTA DE LINKS -->
+                <ul class="cabecalho__menuLista">
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'Home.png'%}" alt="Página Inicial">
+                        <a href="">Página Inicial</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'Hashtag.png'%}" alt="Explorar">
+                        <a href="">Explorar</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'Notification.png'%}" alt="Notificações">
+                        <a href="">Notificações</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'Group.png'%}" alt="Mensagens">
+                        <a href="">Mensagens</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'saved.png'%}" alt="Itens salvos">
+                        <a href="">Itens salvos</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'listas.png'%}" alt="Listas">
+                        <a href="">Listas</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'profile.png'%}" alt="Perfil">
+                        <a href="">Perfil</a>
+                    </li>
+
+                    <li class="cabecalho__menuItem"> 
+                        <img src="{%static 'more.png'%}" alt="Mais">
+                        <a href="">Mais</a>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </header>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudoPrincipal">
+            
+            <!-- TÍTULO -->
+            <h3 class="conteudoPrincipal__titulo">Home</h3>
+            
+            <!-- FORMULÁRIO -->
+            <form class="conteudoPrincipal__formulario">
+                <textarea name="textoTweet" placeholder="O que está acontecendo?" ></textarea>
+            
+                <button type="submit">Tweetar</button>
+            </form>
+</body>
+</html>

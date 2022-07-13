@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'crispy_forms',
+    'timeline',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -158,7 +159,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static/",
+    BASE_DIR / "static/"
 ]
 
 # Default primary key field type
