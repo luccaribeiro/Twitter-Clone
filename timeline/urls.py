@@ -3,7 +3,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path("timeline/", views.principal),
+    path("timeline/", views.principal, name='timeline_page'),
 ]
 
 
