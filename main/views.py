@@ -10,7 +10,7 @@ def register_request(request):
 		form = NewUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			login(request, user)
+			login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 			messages.success(request, "Deu bom." )
 			return redirect("main:homepage")
 		messages.error(request, "Deu Ruim.")

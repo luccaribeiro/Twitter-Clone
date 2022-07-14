@@ -1,5 +1,10 @@
-{% extends "main/header.html" %} {% block content %} {% load crispy_forms_tags
-%} {% load socialaccount %} {% load static %}
+{% extends "main/header.html" %}
+
+{% block content %} 
+
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% load static %}
 
 <div class="container py-5">
   <div class="signin text-center">
@@ -45,5 +50,5 @@
     </p>
   </div>
 
-  {% endblock %}
 </div>
+{% endblock %}
