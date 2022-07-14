@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'adicione-um-segredo-aqui')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +43,34 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'crispy_forms',
+    'timeline',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.google',
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+AUTHENTICATION_BACKENDS = (
+ 'django.contrib.auth.backends.ModelBackend', 
+ 'allauth.account.auth_backends.AuthenticationBackend',
+ )
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/timeline'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -95,9 +122,7 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
-
+# Password validationne 973, in _find_and_load_unlocked
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -133,6 +158,10 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static/",
+]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static/"
 ]
 
 # Default primary key field type
