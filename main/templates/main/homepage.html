@@ -1,13 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <p>{% include 'main/includes/messages.html' %}</p>
-    <h1>Olá</h1>
-</body>
+    <link rel="stylesheet" href="{% static 'main/css/homepage.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <p>{% include 'main/includes/messages.html' %}</p>
+      <div class="icon-homepage">
+        <img
+          src="{% static '/homepage/Twitter_Color_icon-icons.com_71812.png'%}"
+          alt=""
+        />
+      </div>
+      <h1>Acontecendo agora</h1>
+      <h3 class="inscreva">Inscreva-se no Twitter hoje mesmo</h3>
+      <button class="inscrever">
+        <a href="">Inscrever-se no Google</a>
+        <button class="conta"><a href="register/"> Crie sua conta </a></button>
+      </button>
+      <h3>Já tem uma conta?</h3>
+      <button class="conta"><a href="login/"> Entrar </a></button>
+      <div class="img-lateral">
+        <img src="{% static '/homepage/lohp_1302x955.png'%}" alt="" />
+      </div>
+      <div class="rodape">
+        <h6><a href="">Sobre</a></h6>
+        <h6><a href="">Contatos</a></h6>
+        <h6><a href="">Desenvolvedores</a></h6>
+        <h6><a href="">© 2022 BuserTech</a></h6>
+      </div>
+    </div>
+  </body>
 </html>
