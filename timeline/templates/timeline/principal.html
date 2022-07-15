@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{%static 'reset.css'%}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,12 @@
     <title>Clone</title>
 </head>
 <body>
+        
     <div class="container">
 
         <!-- CABEÇALHO -->
         <header class="cabecalho">
 
-            <!-- IMAGEM LOGO -->
             <figure class="cabecalho__logo">
                 <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi"> 
             </figure>
@@ -77,10 +78,34 @@
             <h3 class="conteudoPrincipal__titulo">Home</h3>
             
             <!-- FORMULÁRIO -->
-            <form class="conteudoPrincipal__formulario">
-                <textarea name="textoTweet" placeholder="O que está acontecendo?" ></textarea>
-            
+            <form class="conteudoPrincipal__formulario" method="post">
+                {% csrf_token %}
+                {{ form.content }}
                 <button type="submit">Tweetar</button>
             </form>
+
+            <!-- FEED -->
+            <section class="conteudoPrincipal__feed">
+                <!-- LISTA para os tweets -->
+                <ul class="conteudoPrincipal__listaTweets">
+                    {%for tweet in tweets%}
+                    <li class="conteudoPrincipal__tweet">
+                        <!-- foto perfil -->
+                        <img class="tweet__fotoPerfil" src="" alt="Imagem">
+                        <!--USUÁRIO -->
+                        <div class="tweet__conteudo">
+                            <h2>{{tweet.user}}</h2>
+                            <span></span>
+                            <p>{{tweet.content}}</p>
+                        </div>
+                    </li>
+                    {%endfor%}
+                </ul>
+            </section>
+
+        </main>
+
+    </div>
 </body>
+
 </html>
