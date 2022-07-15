@@ -89,13 +89,14 @@
                 <!-- LISTA para os tweets -->
                 <ul class="conteudoPrincipal__listaTweets">
                     {%for tweet in tweets%}
+                    <!-- Tweet indivual -->
                     <li class="conteudoPrincipal__tweet">
                         <!-- foto perfil -->
                         <img class="tweet__fotoPerfil" src="" alt="Imagem">
                         <!--USUÁRIO -->
                         <div class="tweet__conteudo">
-                            <h2>{{tweet.user}}</h2>
-                            <span></span>
+                            <a href="{% url 'perfil' tweet.user %}"><h2>{{tweet.user}}</h2></a>
+                            <span>3</span>
                             <p>{{tweet.content}}</p>
                         </div>
                     </li>

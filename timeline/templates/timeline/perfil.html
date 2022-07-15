@@ -1,0 +1,8 @@
+<h1>nome do usuario: {{usuario.username}}</h1>
+<h2>Lista de Tweets</h2>
+<ul>
+{%for tweet in postagens%}
+<li>{{tweet.content}}</li>
+<br><br><br><br><br><br>
+{%endfor%}
+</ul>
