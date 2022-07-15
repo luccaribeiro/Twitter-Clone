@@ -1,4 +1,5 @@
 {%load static%}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{%static 'princip.css'%}">
-    <title>Clone</title>
+    <title>Twitter</title>
 </head>
 <body>
         
@@ -58,7 +59,7 @@
 
                     <li class="cabecalho__menuItem"> 
                         <img src="{%static 'profile.png'%}" alt="Perfil">
-                        <a href="">Perfil</a>
+                        <a href="{% url 'perfil' user.username %}">Perfil</a>
                     </li>
 
                     <li class="cabecalho__menuItem"> 
@@ -96,7 +97,8 @@
                         <!--USUÁRIO -->
                         <div class="tweet__conteudo">
                             <a href="{% url 'perfil' tweet.user %}"><h2>{{tweet.user}}</h2></a>
-                            <span>3</span>
+                            <span>@ArrobaDoUsuario</span>
+                            <span>{{tweet.created_on | naturaltime}}</span>
                             <p>{{tweet.content}}</p>
                         </div>
                     </li>

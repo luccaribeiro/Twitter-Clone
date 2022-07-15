@@ -10,8 +10,12 @@ class Tweet(models.Model):
     content = models.CharField(max_length=140)
     created_on = models.DateTimeField(default=timezone.now)
 
+    class Meta():
+        ordering = ['created_on']
+
     def __str__(self):
         return self.content
+
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="like", null=True, blank=True)
     tweet = models.ForeignKey("Tweet", on_delete=models.CASCADE, related_name="like")

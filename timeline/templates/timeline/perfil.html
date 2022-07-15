@@ -1,3 +1,4 @@
+<title>Twitter</title>
 <h1>nome do usuario: {{usuario.username}}</h1>
 <h2>Lista de Tweets</h2>
 <ul>
@@ -6,3 +7,8 @@
 <br><br><br><br><br><br>
 {%endfor%}
 </ul>
+{%if usuario.username != user.username%}
+    <button>Seguir</button>
+{%else%}
+    <button>Editar Perfil</button>
+{%endif%}
