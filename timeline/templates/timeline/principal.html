@@ -1,114 +1,103 @@
-{%load static%}
-{% load humanize %}
+{%load static%} {% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="{%static 'reset.css'%}">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'princip.css'%}">
+  <head>
+    <link rel="stylesheet" href="{%static 'reset.css'%}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{%static 'princip.css'%}" />
     <title>Twitter</title>
-</head>
-<body>
-        
+  </head>
+  <body>
     <div class="container">
+      <!-- CABEÇALHO -->
+      <header class="cabecalho">
+        <figure class="cabecalho__logo">
+          <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
+        </figure>
 
-        <!-- CABEÇALHO -->
-        <header class="cabecalho">
+        <!-- MENU DE NAVEGAÇÃO -->
+        <nav class="cabecalho__menuNavegacao">
+          <!-- LISTA DE LINKS -->
+          <ul class="cabecalho__menuLista">
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'Home.png'%}" alt="Página Inicial" />
+              <a href="">Página Inicial</a>
+            </li>
 
-            <figure class="cabecalho__logo">
-                <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi"> 
-            </figure>
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'Hashtag.png'%}" alt="Explorar" />
+              <a href="">Explorar</a>
+            </li>
 
-            <!-- MENU DE NAVEGAÇÃO -->
-            <nav class="cabecalho__menuNavegacao">
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'Notification.png'%}" alt="Notificações" />
+              <a href="">Notificações</a>
+            </li>
 
-                <!-- LISTA DE LINKS -->
-                <ul class="cabecalho__menuLista">
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'Group.png'%}" alt="Mensagens" />
+              <a href="">Mensagens</a>
+            </li>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'Home.png'%}" alt="Página Inicial">
-                        <a href="">Página Inicial</a>
-                    </li>
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'saved.png'%}" alt="Itens salvos" />
+              <a href="">Itens salvos</a>
+            </li>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'Hashtag.png'%}" alt="Explorar">
-                        <a href="">Explorar</a>
-                    </li>
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'listas.png'%}" alt="Listas" />
+              <a href="">Listas</a>
+            </li>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'Notification.png'%}" alt="Notificações">
-                        <a href="">Notificações</a>
-                    </li>
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'profile.png'%}" alt="Perfil" />
+              <a href="{% url 'perfil' user.username %}">Perfil</a>
+            </li>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'Group.png'%}" alt="Mensagens">
-                        <a href="">Mensagens</a>
-                    </li>
+            <li class="cabecalho__menuItem">
+              <img src="{%static 'more.png'%}" alt="Mais" />
+              <a href="">Mais</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'saved.png'%}" alt="Itens salvos">
-                        <a href="">Itens salvos</a>
-                    </li>
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="conteudoPrincipal">
+        <!-- TÍTULO -->
+        <h3 class="conteudoPrincipal__titulo">Home</h3>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'listas.png'%}" alt="Listas">
-                        <a href="">Listas</a>
-                    </li>
+        <!-- FORMULÁRIO -->
+        <form class="conteudoPrincipal__formulario" method="post">
+          {% csrf_token %} {{ form.content }}
+          <button type="submit">Tweetar</button>
+        </form>
 
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'profile.png'%}" alt="Perfil">
-                        <a href="{% url 'perfil' user.username %}">Perfil</a>
-                    </li>
-
-                    <li class="cabecalho__menuItem"> 
-                        <img src="{%static 'more.png'%}" alt="Mais">
-                        <a href="">Mais</a>
-                    </li>
-                </ul>
-
-            </nav>
-
-        </header>
-
-        <!-- CONTEÚDO PRINCIPAL -->
-        <main class="conteudoPrincipal">
-            
-            <!-- TÍTULO -->
-            <h3 class="conteudoPrincipal__titulo">Home</h3>
-            
-            <!-- FORMULÁRIO -->
-            <form class="conteudoPrincipal__formulario" method="post">
-                {% csrf_token %}
-                {{ form.content }}
-                <button type="submit">Tweetar</button>
-            </form>
-
-            <!-- FEED -->
-            <section class="conteudoPrincipal__feed">
-                <!-- LISTA para os tweets -->
-                <ul class="conteudoPrincipal__listaTweets">
-                    {%for tweet in tweets%}
-                    <!-- Tweet indivual -->
-                    <li class="conteudoPrincipal__tweet">
-                        <!-- foto perfil -->
-                        <img class="tweet__fotoPerfil" src="" alt="Imagem">
-                        <!--USUÁRIO -->
-                        <div class="tweet__conteudo">
-                            <a href="{% url 'perfil' tweet.user %}"><h2>{{tweet.user}}</h2></a>
-                            <span>@ArrobaDoUsuario</span>
-                            <span>{{tweet.created_on | naturaltime}}</span>
-                            <p>{{tweet.content}}</p>
-                        </div>
-                    </li>
-                    {%endfor%}
-                </ul>
-            </section>
-
-        </main>
-
+        <!-- FEED -->
+        <section class="conteudoPrincipal__feed">
+          <!-- LISTA para os tweets -->
+          <ul class="conteudoPrincipal__listaTweets">
+            {%for tweet in tweets%}
+            <!-- Tweet indivual -->
+            <li class="conteudoPrincipal__tweet">
+              <!-- foto perfil -->
+              <img class="tweet__fotoPerfil" src="" alt="Imagem" />
+              <!--USUÁRIO -->
+              <div class="tweet__conteudo">
+                <a href="{% url 'perfil' tweet.user %}"
+                  ><h2>{{tweet.user}}</h2></a
+                >
+                <span>@{{tweet.user.nickname}}</span>
+                <span>{{tweet.created_on | naturaltime}}</span>
+                <p>{{tweet.content}}</p>
+              </div>
+            </li>
+            {%endfor%}
+          </ul>
+        </section>
+      </main>
     </div>
-</body>
-
+  </body>
 </html>
