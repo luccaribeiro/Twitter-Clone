@@ -28,7 +28,18 @@ class Tweet(models.Model):
     def __str__(self):
         text = f'{self.user.user.username}: {self.content}'
         return text
+class Comentarios(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE)
+    content = models.CharField(max_length=140)
+    created_on = models.DateTimeField(default=timezone.now)
 
+    class Meta():
+        ordering = ['-created_on']
+
+    def __str__(self):
+        text = f'{self.user.user.username}: {self.content} | Referencia: {self.tweet}'
+        return text
 class Like(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="like", null=True, blank=True)
     tweet = models.ForeignKey("Tweet", on_delete=models.CASCADE, related_name="like")
