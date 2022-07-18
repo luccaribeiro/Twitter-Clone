@@ -4,6 +4,13 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
 
+import string
+import random
+
+# Geração do @ aleatório e único
+def random_generator(size=24, chars=string.ascii_uppercase + string.digits):
+ return ''.join(random.choice(chars) for _ in range(size))
+
 
 def register_request(request):
 	if request.method == "POST":
