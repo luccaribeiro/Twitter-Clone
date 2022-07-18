@@ -1,5 +1,8 @@
+{% load crispy_forms_tags %} 
+{% load socialaccount %} 
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,47 +13,42 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'main/css/homepage.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <title>Twitter</title>
   </head>
   <body>
-    <p>{% include 'main/includes/messages.html' %}</p>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarText"
-        aria-controls="navbarText"
-        aria-expanded="False"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          {% if user.is_authenticated %}
-
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Welcome, {{user.username}}</a>
-          </li>
-
-          {% else %}
-
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
-
-          {% endif %}
-        </ul>
+    <div class="container">
+      <p>{% include 'main/includes/messages.html' %}</p>
+      <div class="icon-homepage">
+        <img
+          src="{% static '/homepage/Twitter_Color_icon-icons.com_71812.png'%}"
+          alt=""
+        />
       </div>
-    </nav>
+      <h1>Acontecendo agora</h1>
+      <h3 class="inscreva">Inscreva-se no Twitter hoje mesmo</h3>
+      <button class="inscrever">
+        <a href="{% provider_login_url 'google' %}"><img class="image-google"
+          src="{% static '/homepage/Google__G__Logo.svg_-1024x1024.png' %}"/>Inscrever-se com o Google</a>
+        <button class="conta"><a href="register/"> Crie sua conta </a></button>
+      </button>
+      <h3>Já tem uma conta?</h3>
+      <button class="conta"><a href="login/"> Entrar </a></button>
+      <div class="img-lateral">
+        <img src="{% static '/homepage/lohp_1302x955.png'%}" alt="" />
+      </div>
+      <div class="rodape">
+        <h6><a href="">Sobre</a></h6>
+        <h6><a href="">Contatos</a></h6>
+        <h6><a href="">Desenvolvedores</a></h6>
+        <h6><a href="">© 2022 BuserTech</a></h6>
+      </div>
+    </div>
   </body>
 </html>
