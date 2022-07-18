@@ -1,0 +1,25 @@
+/* ---------- MOBILE FRIST ----------- */
+@media (min-width: 1440px){
+    *{
+        margin: 0%;
+        padding: 0%;
+    } 
+}
+
+/* ------ Pagina base.html ------ */
+
+ul{
+    list-style: none;
+}
+
+ul > li > button > a{
+    list-style: none;
+    
+
+}
+
+.img-google {
+    width: 10px;
+
+}
+
