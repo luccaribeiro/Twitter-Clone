@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from main.models import Tweet
+from main.models import Profile, Tweet
 from .forms import PostForm
 from django.contrib.auth.models import User
 
@@ -10,7 +10,9 @@ def principal (request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            usuario = request.user
+            usuario_perfil = Profile.objects.get(user=usuario.id)
+            post.user = usuario_perfil
             post.save()
             return redirect('main:timeline_page')
     else:
@@ -20,6 +22,7 @@ def principal (request):
 
 def perfil(request, username):
     usuario = User.objects.get(username=username)
-    postagens = usuario.tweets.all()
-    context = {'usuario':usuario, 'postagens':postagens}
+    usuario_perfil = Profile.objects.get(user=usuario.id)
+    postagens = usuario_perfil.tweets.all()
+    context = {'usuario':usuario, 'postagens':postagens, 'usuario_perfil':usuario_perfil}
     return render(request, 'timeline/perfil.html', context)
