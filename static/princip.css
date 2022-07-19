@@ -5,7 +5,15 @@
     margin: 0 auto;
     display: flex;
 }
+.logo-int{
+    width: 20px;
+}
 
+figure{
+    display: inline-flex;
+    margin-top: 20px;
+    width: 32%;
+}
 
 .cabecalho{
     flex-basis: 30%;
