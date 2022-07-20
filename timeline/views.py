@@ -31,6 +31,7 @@ def principal(request):
 
 
 def postagem(request, id):
+    noticias = googlenews.results()
     postagem_ref = Tweet.objects.get(id=id)
     comentarios = Comentarios.objects.filter(tweet_id=id).all()
     if request.method == 'POST':
@@ -46,7 +47,7 @@ def postagem(request, id):
     else:
         form = PostForm()
     context = {'postagem_ref': postagem_ref,
-               'form': form, 'comentarios': comentarios}
+               'form': form, 'comentarios': comentarios, 'noticias': noticias}
     return render(request, 'timeline/postagem.html', context)
 
 

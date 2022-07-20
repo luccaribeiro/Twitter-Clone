@@ -112,6 +112,28 @@
     <button type="submit">Tweetar</button>
   </form>
 </main>
+<section class="barra-3">
+  <div id="wrap">
+    <form id="nav-search" class="form-search" action="/search" role="search">
+      <input id="search-query" class="search-input" type="text" placeholder="Search" />
+        <button class="icon" type="submit"></button>
+      </form>
+    </div>
+    <section class="noticias">
+      <h1>
+        O que está acontecendo</h1>
+      {%for noticia in noticias%}
+      <a class="link-noticia" href="{{noticia.link}}">
+        <div class="noticia">
+        <h2>{{noticia.title}}</h2>
+        <br>
+        <h3>{{noticia.desc}}</h3>
+      </div>
+        </a>
+      {%endfor%}
+    </section>
+</section>
+
 </div>
 </body>
 </html>
