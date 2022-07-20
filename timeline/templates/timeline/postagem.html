@@ -1,5 +1,4 @@
-{%load static%} {% load humanize %}
-{%load static%} {% load humanize %}
+{%load static%} {% load humanize %} {%load static%} {% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -64,30 +63,36 @@
           </ul>
         </nav>
       </header>
-<main class="conteudoPrincipal">
-    <!-- TÍTULO -->
-    <h3 style="font-size: 30px;" class="conteudoPrincipal__titulo"> Post do {{postagem_ref.user}}</h3>
+      <main class="conteudoPrincipal">
+        <!-- TÍTULO -->
+        <h3 style="font-size: 30px" class="conteudoPrincipal__titulo">
+          Post do {{postagem_ref.user}}
+        </h3>
 
-    <!-- FORMULÁRIO -->
-<section class="conteudoPrincipal__feed">
-    <!-- LISTA para os tweets -->
-    <ul class="conteudoPrincipal__listaTweets">
-      {%for comentario in comentarios%}
+        <!-- FORMULÁRIO -->
+        <section class="conteudoPrincipal__feed">
+          <!-- LISTA para os tweets -->
+          <ul class="conteudoPrincipal__listaTweets">
+            {%for reply in reply_list%}
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
               <!-- foto perfil -->
-              <img class="tweet__fotoPerfil" src="" alt="Imagem" />
+              <img
+                class="tweet__fotoPerfil"
+                src="{{ reply.user.avatar }}"
+                alt="Imagem"
+              />
               <!--USUÁRIO -->
               <div class="tweet__conteudo">
                 <a href="{% url 'perfil' postagem_ref.user %}"
-                  ><h2>{{comentario.user}}</h2></a
+                  ><h2>{{reply.user}}</h2></a
                 >
-                <span>@{{comentario.user.nickname}}</span>
-                <span>{{comentario.created_on | naturaltime}}</span> 
-                <p>{{comentario.content}}</p>
+                <span>@{{reply.user.nickname}}</span>
+                <span>{{reply.created_on | naturaltime}}</span>
+                <p>{{reply.content}}</p>
               </div>
             </li>
-      {%endfor%}
+            {%endfor%}
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
               <!-- foto perfil -->
@@ -102,13 +107,13 @@
                 <p>{{postagem_ref.content}}</p>
               </div>
             </li>
-    </ul>
-  </section>
-  <form class="conteudoPrincipal__formulario" method="post">
-    {% csrf_token %} {{ form.content }}
-    <button type="submit">Tweetar</button>
-  </form>
-</main>
-</div>
-</body>
+          </ul>
+        </section>
+        <form class="conteudoPrincipal__formulario" method="post">
+          {% csrf_token %} {{ form.content }}
+          <button type="submit">Tweetar</button>
+        </form>
+      </main>
+    </div>
+  </body>
 </html>
