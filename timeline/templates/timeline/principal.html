@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="{%static 'reset.css'%}" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{%static 'princip.css'%}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Twitter</title>
   </head>
   <body>
@@ -67,7 +67,7 @@
       <!-- CONTEÚDO PRINCIPAL -->
       <main class="conteudoPrincipal">
         <!-- TÍTULO -->
-        <h3 class="conteudoPrincipal__titulo">Home</h3>
+        <h3 class="conteudoPrincipal__titulo">Página Inicial</h3>
 
         <!-- FORMULÁRIO -->
         <form class="conteudoPrincipal__formulario" method="post">
@@ -101,15 +101,28 @@
           </ul>
         </section>
       </main>
-      <section style="width: 300px;" class="noticias">
-        {%for noticia in noticias%}
-          <h1>{{noticia.title}}</h1>
-          <br>
-          <h3>{{noticia.desc}}</h3>
-          <a href="{{noticia.link}}"><p>Leia mais</p></a>
-          <br><br><br><br><br><br><br>
-        {%endfor%}
+      <section class="barra-3">
+        <div id="wrap">
+          <form id="nav-search" class="form-search" action="/search" role="search">
+            <input id="search-query" class="search-input" type="text" placeholder="Search" />
+              <button class="icon" type="submit"></button>
+            </form>
+          </div>
+          <section class="noticias">
+            <h1>
+              O que está acontecendo</h1>
+            {%for noticia in noticias%}
+            <a class="link-noticia" href="{{noticia.link}}">
+              <div class="noticia">
+              <h2>{{noticia.title}}</h2>
+              <br>
+              <h3>{{noticia.desc}}</h3>
+            </div>
+              </a>
+            {%endfor%}
+          </section>
       </section>
+      
     </div>
   </body>
 </html>
