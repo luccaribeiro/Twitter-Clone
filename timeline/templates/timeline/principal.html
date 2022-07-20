@@ -101,6 +101,15 @@
           </ul>
         </section>
       </main>
+      <section style="width: 300px;" class="noticias">
+        {%for noticia in noticias%}
+          <h1>{{noticia.title}}</h1>
+          <br>
+          <h3>{{noticia.desc}}</h3>
+          <a href="{{noticia.link}}"><p>Leia mais</p></a>
+          <br><br><br><br><br><br><br>
+        {%endfor%}
+      </section>
     </div>
   </body>
 </html>

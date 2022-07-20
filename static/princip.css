@@ -8,7 +8,10 @@
 .logo-int{
     width: 20px;
 }
+.noticias{
+    margin: 0 20px;
 
+}
 figure{
     display: inline-flex;
     margin-top: 20px;

@@ -1,11 +1,19 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from main.models import Profile, Tweet, Comentarios
-from .forms import ComentariosForm, PostForm
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+from GoogleNews import GoogleNews
+from main.models import Comentarios, Profile, Tweet
 
-def principal (request):
+from .forms import ComentariosForm, PostForm
+
+googlenews = GoogleNews()
+googlenews = GoogleNews(period='d')
+googlenews = GoogleNews(lang='pt', region='BR')
+googlenews.search('BRASIL')
+
+
+def principal(request):
+    noticias = googlenews.results()
     tweets = Tweet.objects.all()
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -18,8 +26,9 @@ def principal (request):
             return redirect('main:timeline_page')
     else:
         form = PostForm()
-    context = {'tweets': tweets, 'form': form }
+    context = {'tweets': tweets, 'form': form, 'noticias': noticias}
     return render(request, 'timeline/principal.html', context)
+
 
 def postagem(request, id):
     postagem_ref = Tweet.objects.get(id=id)
@@ -36,12 +45,15 @@ def postagem(request, id):
             return HttpResponseRedirect(request.path_info)
     else:
         form = PostForm()
-    context = {'postagem_ref':postagem_ref, 'form': form, 'comentarios':comentarios }
+    context = {'postagem_ref': postagem_ref,
+               'form': form, 'comentarios': comentarios}
     return render(request, 'timeline/postagem.html', context)
+
 
 def perfil(request, username):
     usuario = User.objects.get(username=username)
     usuario_perfil = Profile.objects.get(user=usuario.id)
     postagens = usuario_perfil.tweets.all()
-    context = {'usuario':usuario, 'postagens':postagens, 'usuario_perfil':usuario_perfil}
+    context = {'usuario': usuario, 'postagens': postagens,
+               'usuario_perfil': usuario_perfil}
     return render(request, 'timeline/perfil.html', context)
