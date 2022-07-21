@@ -83,7 +83,11 @@
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
               <!-- foto perfil -->
-              <img class="tweet__fotoPerfil" src="" alt="Imagem" />
+              <img
+                class="tweet__fotoPerfil"
+                src="{{ tweet.profile.avatar }}"
+                alt="Imagem"
+              />
               <!--USUÁRIO -->
               <div class="tweet__conteudo">
                 <a href="{% url 'perfil' tweet.user %}"
@@ -91,7 +95,9 @@
                 >
                 <span>@{{tweet.user.nickname}}</span>
                 <span>{{tweet.created_on | naturaltime}}</span>
-                <p>{{tweet.content}}</p>
+                <p>
+                  <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
+                </p>
                 <figure><a href="{%url 'postagem' tweet.id %}"><img style="width: 20px;" src="{%static 'chat.png'%}" alt=""></a></figure>
                 <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'retweet.png'%}" alt=""></a></figure>
                 <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
