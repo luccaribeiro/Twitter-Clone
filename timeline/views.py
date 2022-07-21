@@ -67,9 +67,10 @@ def edit_perfil(request, username):
     usuario_perfil = Profile.objects.get(user=usuario.id)
     postagens = usuario_perfil.tweets.all()
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            usuario_perfil.nickname = 'temp'
             usuario_perfil.nickname = post.nickname
             usuario_perfil.avatar = post.avatar
             usuario_perfil.bio = post.bio

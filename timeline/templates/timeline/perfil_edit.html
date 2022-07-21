@@ -1,15 +1,11 @@
 <title>Twitter</title>
 <h1>EDIÇÃO</h1>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}{{ form.as_p }}
   <button type="submit">Salvar Perfil</button>
 </form>
-<!-- <h1>nome do usuario: {{usuario.username}}</h1>
-<img src="{{ usuario_perfil.avatar }}" alt="Avatar" />
-<h3>{{usuario_perfil.nickname}}</h3>
-<p>{{usuario_perfil.bio}}</p>
 <h2>Lista de Tweets</h2>
-<ul> -->
+<ul>
   {%for tweet in postagens%}
   <li>{{tweet.content}}</li>
   <br /><br /><br /><br /><br />
