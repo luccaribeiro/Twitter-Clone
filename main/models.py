@@ -8,7 +8,7 @@ from .views import random_generator
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=160, default=random_generator, unique=True)
+    nickname = models.CharField(max_length=20, default=random_generator, unique=True)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     bio = models.CharField(max_length=160, default='Passarinho azul')
 

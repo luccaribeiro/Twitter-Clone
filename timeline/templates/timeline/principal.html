@@ -21,31 +21,56 @@
           <!-- LISTA DE LINKS -->
           <ul class="cabecalho-menulista">
             <li>
-              <a href="{% url 'timeline_page' %}"><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página Inicial</a>
-            </li>
-  
-            <li> 
-              <a href=""><img src="{%static 'Hashtag.png'%}" alt="Explorar" />Explorar</a>
-            </li>
-
-            <li>
-              <a href=""><img src="{%static 'Notification.png'%}" alt="Notificações" />Notificações</a>
+              <a href="{% url 'timeline_page' %}"
+                ><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página
+                Inicial</a
+              >
             </li>
 
             <li>
-              <a href=""><img src="{%static 'Group.png'%}" alt="Mensagens" />Mensagens</a>
+              <a href=""
+                ><img
+                  src="{%static 'Hashtag.png'%}"
+                  alt="Explorar"
+                />Explorar</a
+              >
             </li>
 
             <li>
-              <a href=""> <img src="{%static 'saved.png'%}" alt="Itens salvos" />Itens salvos</a>
+              <a href=""
+                ><img
+                  src="{%static 'Notification.png'%}"
+                  alt="Notificações"
+                />Notificações</a
+              >
             </li>
 
             <li>
-              <a href=""><img src="{%static 'listas.png'%}" alt="Listas" />Listas</a>
+              <a href=""
+                ><img
+                  src="{%static 'Group.png'%}"
+                  alt="Mensagens"
+                />Mensagens</a
+              >
             </li>
 
             <li>
-              <a  class="foto-perfil" href="{% url 'perfil' user.username %}"><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a>
+              <a href="">
+                <img src="{%static 'saved.png'%}" alt="Itens salvos" />Itens
+                salvos</a
+              >
+            </li>
+
+            <li>
+              <a href=""
+                ><img src="{%static 'listas.png'%}" alt="Listas" />Listas</a
+              >
+            </li>
+
+            <li>
+              <a class="foto-perfil" href="{% url 'perfil' user.username %}"
+                ><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a
+              >
             </li>
 
             <li>
@@ -66,9 +91,8 @@
             {% csrf_token %} {{ form.content }}
             <p class="borda-caixatt"></p>
             <button class="tuite" type="submit">Tweetar</button>
-            <p class="borda-tuitar"></p> 
+            <p class="borda-tuitar"></p>
           </form>
-          
         </div>
 
         <!-- FEED -->
@@ -82,15 +106,16 @@
               <div class="img-time">
                 <img
                   class="tweet__fotoPerfil"
-                  src="{{ tweet.profile.avatar }}"
+                  src="{{ tweet.user.avatar.url }}"
                   alt="Imagem"
+                  style="border-radius: 50%; width: 60px"
                 />
                 <!--USUÁRIO -->
-                  <a href="{% url 'perfil' tweet.user %}"
-                    ><h2>{{tweet.user}}</h2>
-                  </a>
-                  <span>@{{tweet.user.nickname}}</span>
-                  <span>{{tweet.created_on | naturaltime}}</span>
+                <a href="{% url 'perfil' tweet.user %}"
+                  ><h2>{{tweet.user}}</h2>
+                </a>
+                <span>@{{tweet.user.nickname}}</span>
+                <span>{{tweet.created_on | naturaltime}}</span>
                 <p>{{tweet.content}}</p>
                 <figure>
                   <a href="{%url 'postagem' tweet.id %}"
@@ -119,7 +144,9 @@
                   /></a>
                 </figure>
               </div>
-                <p><a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a></p>
+              <p>
+                <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
+              </p>
             </li>
             {%endfor%}
           </ul>
