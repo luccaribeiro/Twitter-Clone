@@ -1,5 +1,4 @@
-{%load static%} {% load humanize %}
-{%load static%} {% load humanize %}
+{%load static%} {% load humanize %} {%load static%} {% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -64,30 +63,37 @@
           </ul>
         </nav>
       </header>
-<main class="conteudoPrincipal">
-    <!-- TÍTULO -->
-    <h3 style="font-size: 30px;" class="conteudoPrincipal__titulo"> Post do {{postagem_ref.user}}</h3>
+      <main class="conteudoPrincipal">
+        <!-- TÍTULO -->
+        <h3 style="font-size: 30px" class="conteudoPrincipal__titulo">
+          Post do {{postagem_ref.user}}
+        </h3>
 
-    <!-- FORMULÁRIO -->
-<section class="conteudoPrincipal__feed">
-    <!-- LISTA para os tweets -->
-    <ul class="conteudoPrincipal__listaTweets">
-      {%for comentario in comentarios%}
+        <!-- FORMULÁRIO -->
+        <section class="conteudoPrincipal__feed">
+          <!-- LISTA para os tweets -->
+          <ul class="conteudoPrincipal__listaTweets">
+            {%for reply in reply_list%}
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
               <!-- foto perfil -->
-              <img class="tweet__fotoPerfil" src="" alt="Imagem" />
+              <img
+                class="tweet__fotoPerfil"
+                src="{{ reply.user.avatar }}"
+                alt="Imagem"
+              />
               <!--USUÁRIO -->
               <div class="tweet__conteudo">
                 <a href="{% url 'perfil' postagem_ref.user %}"
-                  ><h2>{{comentario.user}}</h2></a
+                  ><h2>{{reply.user}}</h2></a
                 >
-                <span>@{{comentario.user.nickname}}</span>
-                <span>{{comentario.created_on | naturaltime}}</span> 
-                <p>{{comentario.content}}</p>
+                <span>@{{reply.user.nickname}}</span>
+                <span>{{reply.created_on | naturaltime}}</span>
+                <p>{{reply.content}}</p>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
               </div>
             </li>
-      {%endfor%}
+            {%endfor%}
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
               <!-- foto perfil -->
@@ -100,6 +106,8 @@
                 <span>@{{postagem_ref.user.nickname}}</span>
                 <span>{{postagem_ref.created_on | naturaltime}}</span>
                 <p>{{postagem_ref.content}}</p>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'retweet.png'%}" alt=""></a></figure>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
               </div>
             </li>
     </ul>
@@ -109,6 +117,28 @@
     <button type="submit">Tweetar</button>
   </form>
 </main>
+<section class="barra-3">
+  <div id="wrap">
+    <form id="nav-search" class="form-search" action="/search" role="search">
+      <input id="search-query" class="search-input" type="text" placeholder="Search" />
+        <button class="icon" type="submit"></button>
+      </form>
+    </div>
+    <section class="noticias">
+      <h1>
+        O que está acontecendo</h1>
+      {%for noticia in noticias%}
+      <a class="link-noticia" href="{{noticia.link}}">
+        <div class="noticia">
+        <h2>{{noticia.title}}</h2>
+        <br>
+        <h3>{{noticia.desc}}</h3>
+      </div>
+        </a>
+      {%endfor%}
+    </section>
+</section>
+
 </div>
 </body>
 </html>

@@ -1,0 +1,170 @@
+
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+.logo-int{
+    width: 20px;
+}
+.barra-3{
+    width: 400px;
+    margin-right: 30px;
+}
+.noticias{
+    margin-left: 20px;
+    width: 300px;
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 20px 20px;
+    /*height: 750px;
+    overflow: scroll; */
+    background-color: #eff1f180;
+}
+.noticias h1{
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+.noticia h2{
+    font-size: 25px;
+}
+.noticia{
+    margin-bottom: 70px;
+}
+.link-noticia{
+    text-decoration: none;
+    color: inherit;
+}
+figure{
+    display: inline-flex;
+    margin-top: 20px;
+    width: 32%;
+}
+
+.cabecalho{
+    flex-basis: 30%;
+}
+.cabecalho__logo{
+    margin-bottom: 50px;
+}
+.cabecalho__logo img{
+    width: 40px;
+    height: 40px;
+}
+.cabecalho__logo figcaption{
+    display: none;
+}
+
+.cabecalho__menuItem{
+    margin-bottom: 25px;
+}
+.cabecalho__menuItem img{
+    max-width: 26px;
+}
+.cabecalho__menuItem a{
+    color: #000;
+    text-decoration: none;
+    font-size: 22px;
+    vertical-align: top;
+}
+
+
+.conteudoPrincipal{
+    flex-basis: 70%;
+    border-left: 1px solid #e7ecf0;
+    border-right: 1px solid #e7ecf0;
+}
+.conteudoPrincipal__titulo{
+    font-size: 30px;
+    padding: 10px 30px;
+}
+
+.conteudoPrincipal__formulario{
+    padding: 10px 30px;
+    border-top: 1px solid #e7ecf0;
+    border-bottom: 10px solid #e7ecf0;
+    text-align: right;
+}
+.conteudoPrincipal__formulario textarea{
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    height: 55px;
+}
+.conteudoPrincipal__formulario button{
+    background-color: #1da1f2;
+    border: none;
+    padding: 8px 20px;
+    color: #fff;
+    border-radius: 20px;
+}
+
+
+.conteudoPrincipal__listaTweets{
+    display: flex;
+    flex-flow: column-reverse nowrap;
+}
+.conteudoPrincipal__tweet{
+    padding: 20px 32px;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid #e7ecf0;
+}
+
+.tweet__conteudo{
+    margin-left: 15px;
+}
+.tweet__conteudo h2{
+    display: inline-block;
+}
+.tweet__conteudo span{
+    display: inline-block;
+    color: #828282;
+}
+.tweet__conteudo p{
+    margin-top: 15px;
+    color: #333333;
+}
+
+#wrap{
+    text-align:center;
+    margin-top: 30px;
+  }
+  #nav-search {
+    position: relative;
+    width: 292px;
+  }
+  
+  #nav-search input{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    display: block;
+    width: 235px;
+    height: 28px;
+    padding: 6px 30px 6px 12px;
+    cursor: pointer;
+    color: rgb(102, 102, 102);
+    background-color: #EFF3F4;
+    border: none;
+    border-radius: 200px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2) inset;
+    margin-left: 30px;
+  }
+  
+  #nav-search .icon {
+    position: absolute;
+    display: block;
+    top: 10px;
+    right: 4px;
+    width: 14px;
+    height: 15px;
+    background: url("https://abs.twimg.com/a/1374049044/t1/img/twitter_web_sprite_icons.png") -20px -710px no-repeat transparent;
+    border: none;
+    text-indent: -200px;
+    padding: 0;
+    cursor: pointer;
+  }
