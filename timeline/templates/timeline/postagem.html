@@ -90,6 +90,7 @@
                 <span>@{{reply.user.nickname}}</span>
                 <span>{{reply.created_on | naturaltime}}</span>
                 <p>{{reply.content}}</p>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
               </div>
             </li>
             {%endfor%}
@@ -105,6 +106,8 @@
                 <span>@{{postagem_ref.user.nickname}}</span>
                 <span>{{postagem_ref.created_on | naturaltime}}</span>
                 <p>{{postagem_ref.content}}</p>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'retweet.png'%}" alt=""></a></figure>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
               </div>
             </li>
           </ul>

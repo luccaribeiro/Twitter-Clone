@@ -98,6 +98,9 @@
                 <p>
                   <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
                 </p>
+                <figure><a href="{%url 'postagem' tweet.id %}"><img style="width: 20px;" src="{%static 'chat.png'%}" alt=""></a></figure>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'retweet.png'%}" alt=""></a></figure>
+                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
               </div>
             </li>
             {%endfor%}
