@@ -92,9 +92,32 @@
                   <span>@{{tweet.user.nickname}}</span>
                   <span>{{tweet.created_on | naturaltime}}</span>
                 <p>{{tweet.content}}</p>
-                <figure><a href="{%url 'postagem' tweet.id %}"><img style="width: 20px;" src="{%static 'chat.png'%}" alt=""></a></figure>
-                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'retweet.png'%}" alt=""></a></figure>
-                <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
+                <figure>
+                  <a href="{%url 'postagem' tweet.id %}"
+                    ><img
+                      style="width: 20px"
+                      src="{%static 'chat.png'%}"
+                      alt=""
+                  /></a>
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'retweet.png'%}"
+                      alt=""
+                  /></a>
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'heart.png'%}"
+                      alt=""
+                  /></a>
+                </figure>
               </div>
                 <p><a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a></p>
             </li>
@@ -104,26 +127,34 @@
       </main>
       <section class="barra-3">
         <div id="wrap">
-          <form id="nav-search" class="form-search" action="/search" role="search">
-            <input id="search-query" class="search-input" type="text" placeholder="Search" />
-              <button class="icon" type="submit"></button>
-            </form>
-          </div>
-          <section class="noticias">
-            <h1>
-              O que está acontecendo</h1>
-            {%for noticia in noticias%}
-            <a class="link-noticia" href="{{noticia.link}}">
-              <div class="noticia">
+          <form
+            id="nav-search"
+            class="form-search"
+            action="/search"
+            role="search"
+          >
+            <input
+              id="search-query"
+              class="search-input"
+              type="text"
+              placeholder="Search"
+            />
+            <button class="icon" type="submit"></button>
+          </form>
+        </div>
+        <section class="noticias">
+          <h1>O que está acontecendo</h1>
+          {%for noticia in noticias%}
+          <a class="link-noticia" target="_blank" href="{{noticia.link}}">
+            <div class="noticia">
               <h2>{{noticia.title}}</h2>
-              <br>
+              <br />
               <h3>{{noticia.desc}}</h3>
             </div>
-              </a>
-            {%endfor%}
-          </section>
+          </a>
+          {%endfor%}
+        </section>
       </section>
-      
     </div>
   </body>
 </html>

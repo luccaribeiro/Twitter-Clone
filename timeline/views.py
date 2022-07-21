@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from GoogleNews import GoogleNews
 from main.models import Profile, Tweet, Comentarios
-from .forms import PostForm
+from .forms import PostForm, ProfileForm
 from django.contrib.auth.models import User
 
 
@@ -55,6 +55,36 @@ def perfil(request, username):
     usuario = User.objects.get(username=username)
     usuario_perfil = Profile.objects.get(user=usuario.id)
     postagens = usuario_perfil.tweets.all()
-    context = {'usuario': usuario, 'postagens': postagens,
-               'usuario_perfil': usuario_perfil}
+    context = {
+        'usuario': usuario,
+        'postagens': postagens,
+        'usuario_perfil': usuario_perfil
+    }
     return render(request, 'timeline/perfil.html', context)
+
+def edit_perfil(request, username):
+    usuario = User.objects.get(username=username)
+    usuario_perfil = Profile.objects.get(user=usuario.id)
+    postagens = usuario_perfil.tweets.all()
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            usuario_perfil.nickname = post.nickname
+            usuario_perfil.avatar = post.avatar
+            usuario_perfil.bio = post.bio
+            # post.user_id = request.user.id
+            # usuario_perfil = Profile.objects.get(user=usuario.id)
+            # post.user = usuario_perfil
+            # post.reply_to_id = postagem_ref.id
+            usuario_perfil.save()
+            return redirect(reverse('perfil', args=[usuario.username]))
+    else:
+        form = ProfileForm()
+    context = {
+        'usuario': usuario,
+        'postagens': postagens,
+        'usuario_perfil': usuario_perfil,
+        'form': form
+    }
+    return render(request, 'timeline/perfil_edit.html', context)
