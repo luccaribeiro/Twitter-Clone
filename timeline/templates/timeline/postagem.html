@@ -110,13 +110,35 @@
                 <figure><a href=""><img style="width: 20px;" class="logo-int" src="{%static 'heart.png'%}" alt=""></a></figure>
               </div>
             </li>
-          </ul>
-        </section>
-        <form class="conteudoPrincipal__formulario" method="post">
-          {% csrf_token %} {{ form.content }}
-          <button type="submit">Tweetar</button>
-        </form>
-      </main>
+    </ul>
+  </section>
+  <form class="conteudoPrincipal__formulario" method="post">
+    {% csrf_token %} {{ form.content }}
+    <button type="submit">Tweetar</button>
+  </form>
+</main>
+<section class="barra-3">
+  <div id="wrap">
+    <form id="nav-search" class="form-search" action="/search" role="search">
+      <input id="search-query" class="search-input" type="text" placeholder="Search" />
+        <button class="icon" type="submit"></button>
+      </form>
     </div>
-  </body>
+    <section class="noticias">
+      <h1>
+        O que está acontecendo</h1>
+      {%for noticia in noticias%}
+      <a class="link-noticia" href="{{noticia.link}}">
+        <div class="noticia">
+        <h2>{{noticia.title}}</h2>
+        <br>
+        <h3>{{noticia.desc}}</h3>
+      </div>
+        </a>
+      {%endfor%}
+    </section>
+</section>
+
+</div>
+</body>
 </html>
