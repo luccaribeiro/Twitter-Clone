@@ -83,7 +83,11 @@
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
               <!-- foto perfil -->
-              <img class="tweet__fotoPerfil" src="" alt="Imagem" />
+              <img
+                class="tweet__fotoPerfil"
+                src="{{ tweet.profile.avatar }}"
+                alt="Imagem"
+              />
               <!--USUÁRIO -->
               <div class="tweet__conteudo">
                 <a href="{% url 'perfil' tweet.user %}"

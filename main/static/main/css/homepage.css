@@ -1,92 +1,102 @@
+
 /* ----------- MOBILE FRIST 375PX ---------- */
+/* @media (max-width: 425px){ */
+  * {
+    padding: 0%;
+    margin: 0%;
+  }
 
-* {
-  padding: 0%;
-  margin: 0%;
+  html,
+  body {
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .icon-homepage > img {
+    width: 90px;
+    height: 95px;
+    margin-left: 20px;
+    margin-top: -15px;
+    margin-bottom: -65px;
+  }
+
+  h1 {
+    font-size: 52px;
+    letter-spacing: 3px;
+    margin-top: 84px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  h1 > p {
+    margin-right: 160px;
+  }
+
+  .inscreva {
+    font-size: 21px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 0;
+    letter-spacing: 1.5px;
+  }
+
+  button {
+    outline-style: none;
+    border-radius: 40px;
+    width: 300px;
+    height: 35px;
+    margin-left: 52px;
+    font-size: 19px;
+    border: 0.5px solid rgb(207 217 222);
+    background-color: rgb(255 255 255);
+    margin-bottom: 15px;
+  }
+
+  .image-google{
+    width: 19px;
+    height: 20px;
+    margin-right: 10px;
 }
 
-html,
-body {
-  height: 100%;
-  font-family: "Roboto", sans-serif;
-}
+  /* conf. do 'já tem conta' */
+  h3 {
+    margin-bottom: 8px;
+    margin-left: 52px;
+    font-size: 20px;
+    margin-top: 20px;
+  }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+  .img-lateral > img {
+    height: 225px;
+    width: 424px;
+    margin-left: -14px;
+  }
 
-.icon-homepage > img {
-  width: 90px;
-  height: 95px;
-  margin-left: 20px;
-  margin-top: 13px;
-  margin-bottom: -60px;
-}
+  .rodape {
+    display: flex;
+    margin-top: 8px;
+    font-size: 22px;
+    justify-content: space-around;
+  }
 
-h1 {
-  font-size: 52px;
-  letter-spacing: 3px;
-  margin-top: 84px;
-  text-align: center;
-  margin-bottom: 30px;
-}
+  a {
+    text-decoration: none;
+    color: black;
+  }
 
-h1 > p {
-  margin-right: 160px;
-}
-
-.inscreva {
-  font-size: 21px;
-  text-align: center;
-  margin-bottom: 20px;
-  margin-left: 0;
-  letter-spacing: 1.5px;
-}
-
-button {
-  outline-style: none;
-  border-radius: 40px;
-  width: 300px;
-  height: 35px;
-  margin-left: 35px;
-  font-size: 19px;
-  border: 0.5px solid rgb(207 217 222);
-  background-color: rgb(255 255 255);
-  margin-bottom: 15px;
-}
-
-/* conf. do 'já tem conta' */
-h3 {
-  margin-bottom: 8px;
-  margin-left: 36px;
-}
-
-.img-lateral > img {
-  height: 240px;
-  width: 375px;
-}
-
-.rodape {
-  display: flex;
-  margin-top: 8px;
-  font-size: 22px;
-  justify-content: space-around;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-h6 > a {
-  color: rgb(83 100 113);
-  font-size: 11px;
-}
-
+  h6 > a {
+    color: rgb(83 100 113);
+    font-size: 11px;
+  }
+/* } */
 /* ------------------------------------------------ */
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
   html,
   body {
     height: 100%;
@@ -94,54 +104,65 @@ h6 > a {
 
   .container {
     display: flex;
-    align-items: center;
   }
 
   .icon-homepage > img {
     width: 94px;
     height: 95px;
-    margin-left: 200px;
+    margin-left: 610px;
     margin-bottom: -20px;
   }
 
   h1 {
-    margin-left: 800px;
-    font-size: 65px;
-  }
-
-  h1 > p {
-    margin-right: 200px;
+    margin-left: 646px;
+    font-size: 75px;
+    width: 68%;
   }
 
   .inscreva {
-    font-size: 27px;
+    font-size: 30px;
     margin-bottom: 20px;
-    margin-left: 669px;
+    margin-left: 646px;
+    margin-top: 2%;
   }
 
   .img-lateral > img {
-    height: 728px;
-    width: 780px;
-    margin-right: 756px;
-    margin-top: -635px;
-  }
+    height: 944px;
+    width: 952px;
+    margin-left: -404px;
+    margin-top: -771px;;
+}
+
 
   button {
-    margin-left: 592px;
-    width: 400px;
-    font-size: 15px;
+    margin-left: 760px;
+    width: 527px;
+    font-size: 22px;
+    height: 51px;
+  }
+
+  a > .image-google{
+    width: 19px;
+    margin-right: 15px;
   }
 
   h3 {
-    margin-left: 367px;
-    margin-bottom: 10px;
-    margin-top: 60px;
+    margin-left: 766px;
+    margin-bottom: 20px;
+    margin-top: 94px;
+    font-size: 25px;
   }
+
 
   .rodape {
     display: flex;
     width: 1200px;
-    margin-top: 5px;
+    margin-top: 10px;
     justify-content: space-between;
+  }
+
+  h6 > a {
+    color: rgb(83 100 113);
+    font-size: 17px;
   }
 }

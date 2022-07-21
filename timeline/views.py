@@ -2,9 +2,10 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from GoogleNews import GoogleNews
-from main.models import Comentarios, Profile, Tweet
+from main.models import Profile, Tweet, Comentarios
+from .forms import PostForm
+from django.contrib.auth.models import User
 
-from .forms import ComentariosForm, PostForm
 
 googlenews = GoogleNews()
 googlenews = GoogleNews(period='d')
@@ -33,21 +34,20 @@ def principal(request):
 def postagem(request, id):
     noticias = googlenews.results()
     postagem_ref = Tweet.objects.get(id=id)
-    comentarios = Comentarios.objects.filter(tweet_id=id).all()
+    reply_list = Tweet.objects.filter(reply_to=postagem_ref.id)
     if request.method == 'POST':
-        form = ComentariosForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             usuario = request.user
             usuario_perfil = Profile.objects.get(user=usuario.id)
             post.user = usuario_perfil
-            post.tweet_id = postagem_ref.id
+            post.reply_to_id = postagem_ref.id
             post.save()
             return HttpResponseRedirect(request.path_info)
     else:
         form = PostForm()
-    context = {'postagem_ref': postagem_ref,
-               'form': form, 'comentarios': comentarios, 'noticias': noticias}
+    context = {'postagem_ref':postagem_ref, 'form': form, 'reply_list':reply_list, 'noticias': noticias }
     return render(request, 'timeline/postagem.html', context)
 
 
