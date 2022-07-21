@@ -11,8 +11,8 @@ class PostForm(forms.ModelForm):
 
 class ComentariosForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control w-100',
-'id':'formzinho', 'rows':'3', 'placeholder':"O que está acontecendo?" }))
-
+'id':'formzinho', 'rows':'3', 'placeholder':"O que está acontecendo?"}))
+# ----- como colocar o botão tuitar dentro da caixa de tuite -----
     class Meta:
         model = Comentarios
         fields = ['content']

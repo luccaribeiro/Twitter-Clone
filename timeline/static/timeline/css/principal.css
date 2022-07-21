@@ -1,0 +1,123 @@
+/* ------ MOBILE FRIST ------- */
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+body, 
+html{
+    height: 100px;
+}
+
+.container {
+    display: flex;
+    
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+}
+
+header > .logo-twitter > img {
+    width: 45px;
+    height: 45px;
+    margin-left: 252px;
+    margin-bottom: 3px;
+    margin-top: 20px;
+
+}
+
+.cabecalho-menulista{
+    display: flex;
+    flex-direction: column;
+    margin-left: 260px;
+    margin-top: 20px;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li {
+    margin-bottom: 35px;
+    font-size: 23px;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li > a > img {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 35px;
+    margin-bottom: -8px;
+    margin-right: 20px;
+}
+
+.cabecalho-menulista > li > a{
+    text-decoration: none;
+    color:black
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li > .foto-perfil > img {
+    width: 25px;
+    height: 25px;
+}
+
+.conteudo-principal{
+    border: solid 1px gray;
+    margin-left: 130px;
+    width: 585px;
+}
+
+.conteudo-titulo{
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 26px;
+    margin-bottom: 21px;
+}
+
+.tuiteimagem-perfil{
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    margin-top: 20px;
+}
+#formzinho{
+    width: 560px;
+    height: 90px;
+    margin-left: 10px;
+    margin-top: 20px;
+    border: none;
+}
+
+#formzinho{
+    text-decoration: none;
+    border: none;
+
+}
+
+.borda-caixatt{
+    border-bottom: 1px solid rgb(47, 51, 54);
+    width: 450px;
+    margin-left: 97px;
+}
+
+.tuite{
+    border-radius: 40px;
+    width: 115px;
+    height: 39px;
+    margin-left: 436px;
+    font-size: 17px;
+    border: 0.5px solid rgb(207 217 222);
+    background-color: rgb(47 161 242);
+    color: white;
+    margin-top:5px;
+}
+
+.borda-tuitar{
+    border-bottom: 1px solid rgb(47, 51, 54);
+    margin-top: 5px;
+}
+
+.conteudo-feed{
+    margin-top: 20px;
+}
+
+.img-time{
+    display: flex;
+}

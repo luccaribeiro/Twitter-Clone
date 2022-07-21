@@ -6,93 +6,89 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{%static 'princip.css'%}" />
+    <link rel="stylesheet" href="{% static 'timeline/css/principal.css' %}" />
     <title>Twitter</title>
   </head>
   <body>
     <div class="container">
       <!-- CABEÇALHO -->
-      <header class="cabecalho">
-        <figure class="cabecalho__logo">
+      <header>
+        <figure class="logo-twitter">
           <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
         </figure>
-
         <!-- MENU DE NAVEGAÇÃO -->
-        <nav class="cabecalho__menuNavegacao">
+        <nav class="cabecalho-menunav">
           <!-- LISTA DE LINKS -->
-          <ul class="cabecalho__menuLista">
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Home.png'%}" alt="Página Inicial" />
-              <a href="{% url 'timeline_page' %}">Página Inicial</a>
+          <ul class="cabecalho-menulista">
+            <li>
+              <a href="{% url 'timeline_page' %}"><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página Inicial</a>
+            </li>
+  
+            <li> 
+              <a href=""><img src="{%static 'Hashtag.png'%}" alt="Explorar" />Explorar</a>
             </li>
 
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Hashtag.png'%}" alt="Explorar" />
-              <a href="">Explorar</a>
+            <li>
+              <a href=""><img src="{%static 'Notification.png'%}" alt="Notificações" />Notificações</a>
             </li>
 
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Notification.png'%}" alt="Notificações" />
-              <a href="">Notificações</a>
+            <li>
+              <a href=""><img src="{%static 'Group.png'%}" alt="Mensagens" />Mensagens</a>
             </li>
 
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Group.png'%}" alt="Mensagens" />
-              <a href="">Mensagens</a>
+            <li>
+              <a href=""> <img src="{%static 'saved.png'%}" alt="Itens salvos" />Itens salvos</a>
             </li>
 
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'saved.png'%}" alt="Itens salvos" />
-              <a href="">Itens salvos</a>
+            <li>
+              <a href=""><img src="{%static 'listas.png'%}" alt="Listas" />Listas</a>
             </li>
 
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'listas.png'%}" alt="Listas" />
-              <a href="">Listas</a>
+            <li>
+              <a  class="foto-perfil" href="{% url 'perfil' user.username %}"><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a>
             </li>
 
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'profile.png'%}" alt="Perfil" />
-              <a href="{% url 'perfil' user.username %}">Perfil</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'more.png'%}" alt="Mais" />
-              <a href="">Mais</a>
+            <li>
+              <a href=""><img src="{%static 'more.png'%}" alt="Mais" />Mais</a>
             </li>
           </ul>
         </nav>
       </header>
 
       <!-- CONTEÚDO PRINCIPAL -->
-      <main class="conteudoPrincipal">
+      <main class="conteudo-principal">
         <!-- TÍTULO -->
-        <h3 class="conteudoPrincipal__titulo">Home</h3>
-
+        <h3 class="conteudo-titulo">Página inicial</h3>
         <!-- FORMULÁRIO -->
-        <form class="conteudoPrincipal__formulario" method="post">
-          {% csrf_token %} {{ form.content }}
-          <button type="submit">Tweetar</button>
-        </form>
+        <div class="caixa-tuite">
+          <img class="tuiteimagem-perfil" src="" alt="imagem-perfil" />
+          <form class="conteudo-formulario" method="post">
+            {% csrf_token %} {{ form.content }}
+            <p class="borda-caixatt"></p>
+            <button class="tuite" type="submit">Tweetar</button>
+            <p class="borda-tuitar"></p> 
+          </form>
+          
+        </div>
 
         <!-- FEED -->
-        <section class="conteudoPrincipal__feed">
+        <section class="conteudo-feed">
           <!-- LISTA para os tweets -->
-          <ul class="conteudoPrincipal__listaTweets">
+          <ul class="conteudo-listatuites">
             {%for tweet in tweets%}
             <!-- Tweet indivual -->
-            <li class="conteudoPrincipal__tweet">
+            <li class="conteudo-tuite">
               <!-- foto perfil -->
-              <img class="tweet__fotoPerfil" src="" alt="Imagem" />
-              <!--USUÁRIO -->
-              <div class="tweet__conteudo">
-                <a href="{% url 'perfil' tweet.user %}"
-                  ><h2>{{tweet.user}}</h2></a
-                >
-                <span>@{{tweet.user.nickname}}</span>
-                <span>{{tweet.created_on | naturaltime}}</span>
-                <p><a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a></p>
+              <div class="img-time">
+                <img class="tweet-fotoperfil" src="" alt="Imagem" />
+                <!--USUÁRIO -->
+                  <a href="{% url 'perfil' tweet.user %}"
+                    ><h2>{{tweet.user}}</h2>
+                  </a>
+                  <span>@{{tweet.user.nickname}}</span>
+                  <span>{{tweet.created_on | naturaltime}}</span>
               </div>
+                <p><a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a></p>
             </li>
             {%endfor%}
           </ul>
