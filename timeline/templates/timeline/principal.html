@@ -116,7 +116,6 @@
                 </a>
                 <span>@{{tweet.user.nickname}}</span>
                 <span>{{tweet.created_on | naturaltime}}</span>
-                <p>{{tweet.content}}</p>
                 <figure>
                   <a href="{%url 'postagem' tweet.id %}"
                     ><img
@@ -176,7 +175,6 @@
             <div class="noticia">
               <h2>{{noticia.title}}</h2>
               <br />
-              <h3>{{noticia.desc}}</h3>
             </div>
           </a>
           {%endfor%}

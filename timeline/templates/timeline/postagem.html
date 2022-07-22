@@ -91,6 +91,7 @@
                 <span>@{{reply.user.nickname}}</span>
                 <span>{{reply.created_on | naturaltime}}</span>
                 <p>{{reply.content}}</p>
+
                 <figure>
                   <a href=""
                     ><img
@@ -120,14 +121,31 @@
                 <span>@{{postagem_ref.user.nickname}}</span>
                 <span>{{postagem_ref.created_on | naturaltime}}</span>
                 <p>{{postagem_ref.content}}</p>
+                {% if postagem_ref.rt %}
+                <div>
+                  <div style="display: flex">
+                    <img
+                      src="{{postagem_ref.rt.user.avatar.url}}"
+                      alt="Imagem"
+                      style="border-radius: 50%; width: 50px"
+                    />
+                    <h4>
+                      <a href="{% url 'perfil' postagem_ref.rt.user %}"
+                        >{{postagem_ref.rt.user}}</a
+                      >
+                    </h4>
+                  </div>
+                  <p>{{postagem_ref.rt.content}}</p>
+                </div>
+                {% endif %}
                 <figure>
                   <a href=""
                     ><img
                       style="width: 20px"
                       class="logo-int"
                       src="{%static 'retweet.png'%}"
-                      alt=""
-                  /></a>
+                      alt="" /></a
+                  >{{rts}}
                 </figure>
                 <figure>
                   <a href=""
@@ -137,6 +155,7 @@
                       src="{%static 'heart.png'%}"
                       alt=""
                   /></a>
+                  {{likes}}
                 </figure>
               </div>
             </li>
@@ -171,7 +190,6 @@
             <div class="noticia">
               <h2>{{noticia.title}}</h2>
               <br />
-              <h3>{{noticia.desc}}</h3>
             </div>
           </a>
           {%endfor%}

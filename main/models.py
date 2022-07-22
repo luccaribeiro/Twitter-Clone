@@ -46,8 +46,12 @@ class Tweet(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="like", null=True, blank=True)
     tweet = models.ForeignKey("Tweet", on_delete=models.CASCADE, related_name="like")
+    date = models.DateTimeField(default=timezone.now())
     count = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = [['user','tweet']]
+
     def __str__(self):
-        text = f'{self.user.user.username} | {self.tweet} | {self.count}'
+        text = f'{self.user.user.username} | {self.tweet} | {self.date}'
         return text

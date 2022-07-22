@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from GoogleNews import GoogleNews
-from main.models import Profile, Tweet
+from main.models import Like, Profile, Tweet
 from .forms import PostForm, ProfileForm
 from django.contrib.auth.models import User
 
@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 googlenews = GoogleNews()
 googlenews = GoogleNews(period='d')
 googlenews = GoogleNews(lang='pt', region='BR')
-googlenews.search('BRASIL')
+googlenews.get_news('Brasil')
 
 
 def principal(request):
@@ -35,6 +35,9 @@ def postagem(request, id):
     noticias = googlenews.results()
     postagem_ref = Tweet.objects.get(id=id)
     reply_list = Tweet.objects.filter(reply_to=postagem_ref.id)
+    likes = Like.objects.filter(tweet_id=postagem_ref.id).count()
+    rts = Tweet.objects.filter(rt_id=postagem_ref.id).count()
+    replies = reply_list.count()
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -47,7 +50,7 @@ def postagem(request, id):
             return HttpResponseRedirect(request.path_info)
     else:
         form = PostForm()
-    context = {'postagem_ref':postagem_ref, 'form': form, 'reply_list':reply_list, 'noticias': noticias }
+    context = {'postagem_ref':postagem_ref, 'form': form, 'reply_list':reply_list, 'noticias': noticias, 'likes':likes, 'rts':rts, 'replies':replies }
     return render(request, 'timeline/postagem.html', context)
 
 
