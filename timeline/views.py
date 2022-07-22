@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from GoogleNews import GoogleNews
-from main.models import Profile, Tweet, Comentarios
+from main.models import Profile, Tweet
 from .forms import PostForm, ProfileForm
 from django.contrib.auth.models import User
 

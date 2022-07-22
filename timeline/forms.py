@@ -1,6 +1,6 @@
 from pyexpat import model
 from django import forms
-from main.models import Profile, Tweet, Comentarios
+from main.models import Profile, Tweet
 
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control w-100',
@@ -15,7 +15,6 @@ class ComentariosForm(forms.ModelForm):
 'id':'formzinho', 'rows':'3', 'placeholder':"O que está acontecendo?"}))
 # ----- como colocar o botão tuitar dentro da caixa de tuite -----
     class Meta:
-        model = Comentarios
         fields = ['content']
 
 class ProfileForm(forms.ModelForm):
