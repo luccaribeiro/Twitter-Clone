@@ -1,4 +1,4 @@
-/* ------ MOBILE FRIST ------- */
+
 *{
     margin: 0%;
     padding: 0%;
@@ -20,11 +20,10 @@ header{
 }
 
 header > .logo-twitter > img {
-    width: 45px;
-    height: 45px;
-    margin-left: 252px;
+    width: 38px;
+    height: 38px;
+    margin-left: 258px;
     margin-bottom: 3px;
-    margin-top: 20px;
 
 }
 
@@ -61,12 +60,12 @@ header > .logo-twitter > img {
 .conteudo-principal{
     border: solid 1px gray;
     margin-left: 130px;
-    width: 585px;
+    width: 670px;
 }
 
 .conteudo-titulo{
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 21px;
     font-size: 26px;
     margin-bottom: 21px;
 }
@@ -75,17 +74,18 @@ header > .logo-twitter > img {
     margin-left: 10px;
     width: 25px;
     height: 25px;
-    margin-top: 20px;
+    margin-top: 11px;
 }
+
 #formzinho{
-    width: 560px;
+    width: 643px;
     height: 90px;
     margin-left: 10px;
     margin-top: 20px;
     border: none;
 }
 
-#formzinho{
+#formzinho input{
     text-decoration: none;
     border: none;
 
@@ -93,15 +93,15 @@ header > .logo-twitter > img {
 
 .borda-caixatt{
     border-bottom: 1px solid rgb(47, 51, 54);
-    width: 450px;
-    margin-left: 97px;
+    width: 500px;
+    margin-left: 140px;
 }
 
 .tuite{
     border-radius: 40px;
     width: 115px;
     height: 39px;
-    margin-left: 436px;
+    margin-left: 530px;
     font-size: 17px;
     border: 0.5px solid rgb(207 217 222);
     background-color: rgb(47 161 242);
@@ -114,10 +114,97 @@ header > .logo-twitter > img {
     margin-top: 5px;
 }
 
-.conteudo-feed{
-    margin-top: 20px;
+.conteudo-tuite{
+    border-bottom: 1px solid grey;
 }
 
 .img-time{
     display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.img-time > img {
+    border-radius: 50%;
+    width: 60px;
+    margin-top: 10px;
+}
+
+.img-time > a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    border-bottom: solid 1px transparent;
+    font-size: 20px;
+    margin-top: -11px;
+}  
+
+.img-time > a:hover{
+    border-bottom: solid 1px black;
+}
+
+.nickname,
+span {
+    margin-left: 7px;
+    font-size: 11px;
+    color: grey;
+    margin-top: -11px;
+}
+
+.texto-tuite{
+    margin-left: 80px;
+}
+
+#wrap {
+    margin: 14px 0 0 57px;
+}
+
+#search-query{
+    width: 301px;
+    height: 30px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    padding: 6px 30px 6px 19px;
+    background-color: #EFF3F4;
+    border: none;
+    border-radius: 200px;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 20%) inset;
+}
+
+.noticias{
+    margin-left: 56px;
+    margin-top: 26px;
+    border-radius: 15px;
+    background-color: #eff1f180;
+    width: 360px;
+    padding: 10px;
+}
+
+.noticias > h1{
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.noticia > h2{
+    font-size: 20px;
+}
+
+.noticia{
+    margin-bottom: 37px;
+}
+
+.link-noticia{
+    text-decoration: none;
+    color: inherit;
+}
+
+.interacao{
+    margin-left: 79px;
+    display: flex;
+    margin-top: 28px;
+    margin-bottom: 7px;
+}
+
+figure{
+    width: 32%;
 }
