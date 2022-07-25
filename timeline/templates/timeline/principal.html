@@ -88,8 +88,8 @@
         <div class="caixa-tuite">
           <img
             class="tuiteimagem-perfil"
-            src="{{user_logado.avatar.url}}"
-            alt="imagem-perfil"
+            src="{{ tweet.user.avatar.url }}"
+            alt="Imagem"
           />
           <form class="conteudo-formulario" method="post">
             {% csrf_token %} {{ form.content }}
@@ -108,18 +108,16 @@
             <li class="conteudo-tuite">
               <!-- foto perfil -->
               <div class="img-time">
-                <img
-                  class="tweet__fotoPerfil"
-                  src="{{ tweet.user.avatar.url }}"
-                  alt="Imagem"
-                  style="border-radius: 50%; width: 60px"
-                />
+                <img src="{{ tweet.user.avatar.url }}" alt="Imagem" />
                 <!--USUÁRIO -->
                 <a href="{% url 'perfil' tweet.user %}"
                   ><h2>{{tweet.user}}</h2>
                 </a>
-                <span>@{{tweet.user.nickname}}</span>
-                <span>{{tweet.created_on | naturaltime}}</span>
+                <span class="nickname">@{{tweet.user.nickname}}</span>
+                <span> {{tweet.created_on | naturaltime}}</span>
+              </div>
+              <div class="texto-tuite">{{tweet.content}}</div>
+              <div class="interacao">
                 <figure>
                   <a href="{%url 'postagem' tweet.id %}"
                     ><img
@@ -147,9 +145,9 @@
                   /></a>
                 </figure>
               </div>
-              <p>
+              <!-- <p>
                 <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
-              </p>
+              </p> -->
             </li>
             {%endfor%}
           </ul>
