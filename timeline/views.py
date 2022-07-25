@@ -16,6 +16,7 @@ googlenews = GoogleNews(lang='pt', region='BR')
 def principal(request):
     noticias = googlenews.results()
     tweets = Tweet.objects.all()
+    user_logado = Profile.objects.get(user_id=request.user.id)
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -27,7 +28,7 @@ def principal(request):
             return redirect('main:timeline_page')
     else:
         form = PostForm()
-    context = {'tweets': tweets, 'form': form, 'noticias': noticias}
+    context = {'tweets': tweets, 'form': form, 'noticias': noticias, 'user_logado':user_logado}
     return render(request, 'timeline/principal.html', context)
 
 

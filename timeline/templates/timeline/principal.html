@@ -86,7 +86,11 @@
         <h3 class="conteudo-titulo">Página inicial</h3>
         <!-- FORMULÁRIO -->
         <div class="caixa-tuite">
-          <img class="tuiteimagem-perfil" src="" alt="imagem-perfil" />
+          <img
+            class="tuiteimagem-perfil"
+            src="{{user_logado.avatar.url}}"
+            alt="imagem-perfil"
+          />
           <form class="conteudo-formulario" method="post">
             {% csrf_token %} {{ form.content }}
             <p class="borda-caixatt"></p>
