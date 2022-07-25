@@ -18,7 +18,8 @@ class ComentariosForm(forms.ModelForm):
         fields = ['content']
 
 class ProfileForm(forms.ModelForm):
-
+    nickname = forms.CharField(widget=forms.TextInput(attrs={'class':'LAURA', 'id':'nickname'}))
+    bio = forms.CharField(widget=forms.TextInput(attrs={'class':'LAURA', 'id':'bio'}))
     class Meta:
         model = Profile
         fields = ['nickname', 'avatar', 'bio']

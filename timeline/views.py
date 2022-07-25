@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 googlenews = GoogleNews()
 googlenews = GoogleNews(period='d')
 googlenews = GoogleNews(lang='pt', region='BR')
-googlenews.get_news('Brasil')
+# googlenews.get_news('Brasil')
 
 
 def principal(request):
