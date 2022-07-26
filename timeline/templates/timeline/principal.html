@@ -86,10 +86,11 @@
         <h3 class="conteudo-titulo">Página inicial</h3>
         <!-- FORMULÁRIO -->
         <div class="caixa-tuite">
-          <img class="tuiteimagem-perfil"
-          src="{{ tweet.user.avatar.url }}"
-          alt="Imagem"
-        />
+          <img
+            class="tuiteimagem-perfil"
+            src="{{ user_logado.avatar.url }}"
+            alt="Imagem"
+          />
           <form class="conteudo-formulario" method="post">
             {% csrf_token %} {{ form.content }}
             <p class="borda-caixatt"></p>
@@ -107,10 +108,7 @@
             <li class="conteudo-tuite">
               <!-- foto perfil -->
               <div class="img-time">
-                <img
-                  src="{{ tweet.user.avatar.url }}"
-                  alt="Imagem"
-                />
+                <img src="{{ tweet.user.avatar.url }}" alt="Imagem" />
                 <!--USUÁRIO -->
                 <a href="{% url 'perfil' tweet.user %}"
                   ><h2>{{tweet.user}}</h2>
@@ -121,32 +119,32 @@
               <div class="texto-tuite">{{tweet.content}}</div>
               <div class="interacao">
                 <figure>
-                    <a href="{%url 'postagem' tweet.id %}"
-                      ><img
-                        style="width: 20px"
-                        src="{%static 'chat.png'%}"
-                        alt=""
-                    /></a>
-                  </figure>
-                  <figure>
-                    <a href=""
-                      ><img
-                        style="width: 20px"
-                        class="logo-int"
-                        src="{%static 'retweet.png'%}"
-                        alt=""
-                    /></a>
-                  </figure>
-                  <figure>
-                    <a href=""
-                      ><img
-                        style="width: 20px"
-                        class="logo-int"
-                        src="{%static 'heart.png'%}"
-                        alt=""
-                    /></a>
-                  </figure>
-              </div> 
+                  <a href="{%url 'postagem' tweet.id %}"
+                    ><img
+                      style="width: 20px"
+                      src="{%static 'chat.png'%}"
+                      alt=""
+                  /></a>
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'retweet.png'%}"
+                      alt=""
+                  /></a>
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'heart.png'%}"
+                      alt=""
+                  /></a>
+                </figure>
+              </div>
               <!-- <p>
                 <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
               </p> -->
@@ -179,7 +177,6 @@
             <div class="noticia">
               <h2>{{noticia.title}}</h2>
               <br />
-              <h3>{{noticia.desc}}</h3>
             </div>
           </a>
           {%endfor%}

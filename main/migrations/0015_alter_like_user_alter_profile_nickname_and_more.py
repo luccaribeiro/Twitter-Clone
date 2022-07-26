@@ -15,16 +15,27 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='like',
             name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='like', to='main.profile'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='like',
+                to='main.profile'),
         ),
         migrations.AlterField(
             model_name='profile',
             name='nickname',
-            field=models.CharField(default=main.views.random_generator, max_length=160, unique=True),
+            field=models.CharField(
+                default=main.views.random_generator,
+                max_length=160,
+                unique=True),
         ),
         migrations.AlterField(
             model_name='tweet',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tweets', to='main.profile'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='tweets',
+                to='main.profile'),
         ),
     ]

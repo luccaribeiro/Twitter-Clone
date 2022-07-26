@@ -24,6 +24,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='comentarios',
             name='tweet',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comentarios', to='main.tweet'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='comentarios',
+                to='main.tweet'),
         ),
     ]
