@@ -28,7 +28,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.CharField(max_length=140)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tweets', to='main.user')),
+                ('user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='tweets',
+                    to='main.user')),
             ],
         ),
         migrations.CreateModel(
@@ -36,7 +39,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('count', models.IntegerField(default=0)),
-                ('tweet', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='like', to='main.tweet')),
+                ('tweet', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='like',
+                    to='main.tweet')),
             ],
         ),
     ]
