@@ -121,13 +121,19 @@
               </div>
               <div class="texto-tuite">{{tweet.content}}</div>
               {% if tweet.original_tweet_id %}
-              <img
-                src="{{tweet.original_tweet.user.avatar.url}}"
-                alt="{{tweet.original_tweet.user.user.username}}"
-                style="width: 30px; border-radius: 50%"
-              />
-              <div>{{tweet.original_tweet.user.user.username}}</div>
-              <div>{{tweet.original_tweet.content}}</div>
+              <div class="retuite">
+                <img
+                    src="{{tweet.original_tweet.user.avatar.url}}"
+                    alt="{{tweet.original_tweet.user.user.username}}"
+                />
+                <div>
+                  <a href="">{{tweet.original_tweet.user.user.username}}</a>
+                  <span class="nickname-retuite">@{{tweet.user.nickname}}</span>
+                  <span> {{tweet.created_on | naturaltime}}</span>  
+                </div>
+                <div class="texto-retuite"><p>{{tweet.original_tweet.content}}</p></div>
+              </div>
+              
               {% endif %}
               <div class="interacao">
                 <figure>
@@ -136,7 +142,7 @@
                       style="width: 20px"
                       src="{%static 'chat.png'%}"
                       alt="" /></a
-                  >{{tweet.reply.count}}
+                  ><div class="contador">{{tweet.reply.count}}</div>
                 </figure>
                 <figure>
                   <a href="{% url 'retweet' tweet.id %}"
@@ -146,7 +152,7 @@
                       src="{%static 'retweet.png'%}"
                       alt=""
                   /></a>
-                  {{tweet.retweet.count}}
+                  <div class="contador">{{tweet.retweet.count}}</div>
                 </figure>
                 <figure>
                   <a href=""
@@ -156,7 +162,7 @@
                       src="{%static 'heart.png'%}"
                       alt=""
                   /></a>
-                  {{tweet.like.count}}
+                  <div class="contador">{{tweet.like.count}}</div>
                 </figure>
               </div>
               <!-- <p>

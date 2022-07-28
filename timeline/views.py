@@ -27,7 +27,7 @@ def principal(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = Profile.objects.get(user=request.user.id)
+            post.user_id = Profile.objects.get(user=request.user.id)
             post.save()
             return redirect("main:timeline_page")
     else:
@@ -49,7 +49,7 @@ def postagem(request, id):
         form = ReplyForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = Profile.objects.get(user=request.user.id).id
+            post.user_id = int(Profile.objects.get(user=request.user.id).id)
             post.reference_tweet_id = id
             post.save()
             return HttpResponseRedirect(request.path_info)
