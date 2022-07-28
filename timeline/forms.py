@@ -1,6 +1,23 @@
 from django import forms
 
-from main.models import Profile, Tweet, Retweet
+from main.models import Profile, Reply, Tweet, Retweet
+
+
+class ReplyForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control w-100",
+                "id": "formzinho",
+                "rows": "3",
+                "placeholder": "O que está acontecendo?",
+            }
+        )
+    )
+
+    class Meta:
+        model = Reply
+        fields = ["content"]
 
 
 class PostForm(forms.ModelForm):

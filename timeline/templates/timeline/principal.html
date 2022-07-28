@@ -69,7 +69,10 @@
 
             <li>
               <a class="foto-perfil" href="{% url 'perfil' user.username %}"
-                ><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a
+                ><img
+                  src="{{ request.user.profile.avatar.url }}"
+                  alt="Perfil"
+                />Perfil</a
               >
             </li>
 
@@ -88,7 +91,7 @@
         <div class="caixa-tuite">
           <img
             class="tuiteimagem-perfil"
-            src="{{ user_logado.avatar.url }}"
+            src="{{ request.user.profile.avatar.url }}"
             alt="Imagem"
           />
           <form class="conteudo-formulario" method="post">
@@ -117,23 +120,33 @@
                 <span> {{tweet.created_on | naturaltime}}</span>
               </div>
               <div class="texto-tuite">{{tweet.content}}</div>
+              {% if tweet.original_tweet_id %}
+              <img
+                src="{{tweet.original_tweet.user.avatar.url}}"
+                alt="{{tweet.original_tweet.user.user.username}}"
+                style="width: 30px; border-radius: 50%"
+              />
+              <div>{{tweet.original_tweet.user.user.username}}</div>
+              <div>{{tweet.original_tweet.content}}</div>
+              {% endif %}
               <div class="interacao">
                 <figure>
                   <a href="{%url 'postagem' tweet.id %}"
                     ><img
                       style="width: 20px"
                       src="{%static 'chat.png'%}"
-                      alt=""
-                  /></a>
+                      alt="" /></a
+                  >{{tweet.reply.count}}
                 </figure>
                 <figure>
-                  <a href=""
+                  <a href="{% url 'retweet' tweet.id %}"
                     ><img
                       style="width: 20px"
                       class="logo-int"
                       src="{%static 'retweet.png'%}"
                       alt=""
                   /></a>
+                  {{tweet.retweet.count}}
                 </figure>
                 <figure>
                   <a href=""
@@ -143,6 +156,7 @@
                       src="{%static 'heart.png'%}"
                       alt=""
                   /></a>
+                  {{tweet.like.count}}
                 </figure>
               </div>
               <!-- <p>
