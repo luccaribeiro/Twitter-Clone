@@ -183,7 +183,6 @@ figure{
 .interacao{
     display: flex;
     margin-top: 12px;
-    margin-bottom: 7px;
     justify-content: space-between;
 }
 
@@ -222,3 +221,7 @@ figure{
     box-shadow: 0px 1px 2px rgb(0 0 0 / 20%) inset;
   }
 
+.contador{
+    margin-left: 5px;
+    margin-top: 3px;
+}
