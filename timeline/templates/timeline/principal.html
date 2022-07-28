@@ -118,7 +118,9 @@
                 <span class="nickname">@{{tweet.user.nickname}}</span>
                 <span> {{tweet.created_on | naturaltime}}</span>
               </div>
-              <div class="texto-tuite">{{tweet.content}}</div>
+              <div class="texto-tuite">
+                <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
+              </div>
               <div class="interacao">
                 <figure>
                     <a href="{%url 'postagem' tweet.id %}"
@@ -147,9 +149,6 @@
                     /></a>
                   </figure>
               </div> 
-              <!-- <p>
-                <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
-              </p> -->
             </li>
             {%endfor%}
           </ul>
