@@ -10,7 +10,7 @@ from .forms import ProfileForm, PostForm, RtForm, ReplyForm
 googlenews = GoogleNews()
 googlenews = GoogleNews(period="d")
 googlenews = GoogleNews(lang="pt", region="BR")
-# googlenews.get_news('Brasil')
+googlenews.search("Brasil")
 
 
 def principal(request):
@@ -27,7 +27,7 @@ def principal(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user_id = Profile.objects.get(user=request.user.id)
+            post.user_id = Profile.objects.get(user=request.user.id).id
             post.save()
             return redirect("main:timeline_page")
     else:
