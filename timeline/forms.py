@@ -10,7 +10,7 @@ class ReplyForm(forms.ModelForm):
                 "class": "form-control w-100",
                 "id": "formzinho",
                 "rows": "3",
-                "placeholder": "O que está acontecendo?",
+                "placeholder": "Tweete sua resposta",
             }
         )
     )
@@ -44,7 +44,7 @@ class RtForm(forms.ModelForm):
                 "class": "form-control w-100",
                 "id": "formzinho",
                 "rows": "3",
-                "placeholder": "O que está acontecendo?",
+                "placeholder": "Adicionar um comentário",
             }
         )
     )

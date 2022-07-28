@@ -147,11 +147,52 @@ span {
     margin-top: -11px;
 }
 
-.texto-tuite > a{
+.texto-tuite{
     margin-left: 81px;
     text-decoration: none;
     font-size: 18px;
     color: black;
+    margin-top: -20px;
+}
+
+.retuite{
+  border: 1px solid #e7ecf0;
+  display: flex;
+  width: 550px;
+  height: 100px;
+  margin-left: 50px;
+  border-radius: 15px;
+  margin-top: 25px;
+}
+
+.retuite > img{
+  border-radius: 50%;
+  width: 56px;
+  height: 58px;
+  margin: 16px 10px 0px 16px;
+}
+
+.retuite > div {
+  margin-top: 20px;
+}
+
+.retuite > div > a {
+  text-decoration: none;
+  color:black;
+  border: 1px solid transparent; 
+}
+
+.retuite > div > a:hover{
+  border-bottom: solid 1px black;
+}
+
+.retuite > .texto-retuite{
+  margin-top: 54px!important;
+    margin-left: -322px;
+}
+
+.retuite > .texto-retuite:hover{
+  border: none!important;
 }
 
 #wrap {
@@ -205,5 +246,11 @@ span {
 }
 
 figure {
+  display: flex;
   width: 32%;
+}
+
+.contador{
+  margin-left: 5px;
+  margin-top: 3px;
 }
