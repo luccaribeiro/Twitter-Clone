@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{%static 'princip.css'%}" />
+    <link rel="stylesheet" href="{% static 'timeline/css/postagem.css' %}" />
     <title>Twitter</title>
   </head>
   <body>
@@ -65,8 +65,8 @@
       </header>
       <main class="conteudoPrincipal">
         <!-- TÍTULO -->
-        <h3 style="font-size: 30px" class="conteudoPrincipal__titulo">
-          Post do {{postagem_ref.user}}
+        <h3 class="conteudoPrincipal__titulo">
+          <a href="{% url 'timeline_page' %}"><img src="{%static 'timeline/seta.png' %}" alt="">tweets</a>
         </h3>
 
         <!-- FORMULÁRIO -->
@@ -81,41 +81,49 @@
                 class="tweet__fotoPerfil"
                 src="{{ reply.user.avatar.url }}"
                 alt="Imagem"
-                style="border-radius: 50%; width: 60px"
               />
               <!--USUÁRIO -->
               <div class="tweet__conteudo">
                 <a href="{% url 'perfil' postagem_ref.user %}"
                   ><h2>{{reply.user}}</h2></a
                 >
-                <span>@{{reply.user.nickname}}</span>
-                <span>{{reply.created_on | naturaltime}}</span>
+                <div class="span">
+                  <span>@{{reply.user.nickname}}</span>
+                <span style="margin-left: 5px;">{{reply.created_on | naturaltime}}</span>
+                </div>
                 <p>{{reply.content}}</p>
-
-                <!-- <figure>
-                  <a href="{% url 'retweet' reply.id %}"
-                    ><img
-                      style="width: 20px"
-                      class="logo-int"
-                      src="{%static 'retweet.png'%}"
-                      alt=""
-                  /></a>
-                </figure> -->
-                <figure>
-                  <a href=""
-                    ><img
-                      style="width: 20px"
-                      class="logo-int"
-                      src="{%static 'heart.png'%}"
-                      alt="" /></a
-                  >{{reply.like.count}}
-                </figure>
+                <div class="interacao">
+                  <figure>
+                      <a href=""
+                        ><img
+                          class="logo-int"
+                          src="{%static 'chat.png'%}"
+                          alt=""
+                      /></a>
+                    </figure>
+                    <figure>
+                      <a href=""
+                        ><img
+                          class="logo-int"
+                          src="{%static 'retweet.png'%}"
+                          alt=""
+                      /></a>
+                    </figure>
+                    <figure>
+                      <a href=""
+                        ><img
+                          class="logo-int"
+                          src="{%static 'heart.png'%}"
+                          alt=""
+                      /></a>{{reply.like.count}}
+                    </figure>
+                </div> 
               </div>
             </li>
             {%endfor%}
             <form class="conteudoPrincipal__formulario" method="post">
               {% csrf_token %} {{ form.content }}
-              <button type="submit">Tweetar</button>
+              <button class="tuitar" type="submit">Tweetar</button>
             </form>
             <!-- Tweet indivual -->
             <li class="conteudoPrincipal__tweet">
@@ -124,16 +132,19 @@
                 class="tweet__fotoPerfil"
                 src="{{postagem_ref.user.avatar.url}}"
                 alt="Imagem"
-                style="border-radius: 50%; width: 100px"
               />
               <!--USUÁRIO -->
               <div class="tweet__conteudo">
                 <a href="{% url 'perfil' postagem_ref.user %}"
                   ><h2>{{postagem_ref.user}}</h2></a
                 >
-                <span>@{{postagem_ref.user.nickname}}</span>
-                <span>{{postagem_ref.created_on | naturaltime}}</span>
+                <div class="span">
+                  <span>@{{postagem_ref.user.nickname}}</span>
+                  <span style="margin-left: 5px;">{{postagem_ref.created_on | naturaltime}}</span>
+                </div>
+                
                 <p>{{postagem_ref.content}}</p>
+
                 {% if postagem_ref.rt %}
                 <div>
                   <div style="display: flex">
@@ -151,24 +162,26 @@
                   <p>{{postagem_ref.rt.content}}</p>
                 </div>
                 {% endif %}
-                <figure>
-                  <a href="{% url 'retweet' postagem_ref.id %}"
+                <div class="interacao">
+                  <figure>
+                    <a href="{% url 'retweet' postagem_ref.id %}"
                     ><img
-                      style="width: 20px"
-                      class="logo-int"
-                      src="{%static 'retweet.png'%}"
-                      alt="" /></a
-                  >{{postagem_ref.retweet.count}}
-                </figure>
-                <figure>
-                  <a href=""
-                    ><img
+                    style="width: 20px"
+                    class="logo-int"
+                    src="{%static 'retweet.png'%}"
+                    alt="" /></a
+                    >{{postagem_ref.retweet.count}}
+                  </figure>
+                  <figure>
+                    <a href=""
+                      ><img
                       style="width: 20px"
                       class="logo-int"
                       src="{%static 'heart.png'%}"
                       alt="" /></a
-                  >{{postagem_ref.like.count}}
-                </figure>
+                      >{{postagem_ref.like.count}}
+                  </figure>
+                </div>
               </div>
             </li>
           </ul>
