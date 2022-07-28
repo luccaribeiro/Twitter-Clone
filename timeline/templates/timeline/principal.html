@@ -69,7 +69,10 @@
 
             <li>
               <a class="foto-perfil" href="{% url 'perfil' user.username %}"
-                ><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a
+                ><img
+                  src="{{ request.user.profile.avatar.url }}"
+                  alt="Perfil"
+                />Perfil</a
               >
             </li>
 
@@ -86,10 +89,11 @@
         <h3 class="conteudo-titulo">Página inicial</h3>
         <!-- FORMULÁRIO -->
         <div class="caixa-tuite">
-          <img class="tuiteimagem-perfil"
-          src="{{ tweet.user.avatar.url }}"
-          alt="Imagem"
-        />
+          <img
+            class="tuiteimagem-perfil"
+            src="{{ request.user.profile.avatar.url }}"
+            alt="Imagem"
+          />
           <form class="conteudo-formulario" method="post">
             {% csrf_token %} {{ form.content }}
             <p class="borda-caixatt"></p>
@@ -107,10 +111,7 @@
             <li class="conteudo-tuite">
               <!-- foto perfil -->
               <div class="img-time">
-                <img
-                  src="{{ tweet.user.avatar.url }}"
-                  alt="Imagem"
-                />
+                <img src="{{ tweet.user.avatar.url }}" alt="Imagem" />
                 <!--USUÁRIO -->
                 <a href="{% url 'perfil' tweet.user %}"
                   ><h2>{{tweet.user}}</h2>
@@ -118,37 +119,49 @@
                 <span class="nickname">@{{tweet.user.nickname}}</span>
                 <span> {{tweet.created_on | naturaltime}}</span>
               </div>
-              <div class="texto-tuite">
-                <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
-              </div>
+              <div class="texto-tuite">{{tweet.content}}</div>
+              {% if tweet.original_tweet_id %}
+              <img
+                src="{{tweet.original_tweet.user.avatar.url}}"
+                alt="{{tweet.original_tweet.user.user.username}}"
+                style="width: 30px; border-radius: 50%"
+              />
+              <div>{{tweet.original_tweet.user.user.username}}</div>
+              <div>{{tweet.original_tweet.content}}</div>
+              {% endif %}
               <div class="interacao">
                 <figure>
-                    <a href="{%url 'postagem' tweet.id %}"
-                      ><img
-                        style="width: 20px"
-                        src="{%static 'chat.png'%}"
-                        alt=""
-                    /></a>
-                  </figure>
-                  <figure>
-                    <a href=""
-                      ><img
-                        style="width: 20px"
-                        class="logo-int"
-                        src="{%static 'retweet.png'%}"
-                        alt=""
-                    /></a>
-                  </figure>
-                  <figure>
-                    <a href=""
-                      ><img
-                        style="width: 20px"
-                        class="logo-int"
-                        src="{%static 'heart.png'%}"
-                        alt=""
-                    /></a>
-                  </figure>
-              </div> 
+                  <a href="{%url 'postagem' tweet.id %}"
+                    ><img
+                      style="width: 20px"
+                      src="{%static 'chat.png'%}"
+                      alt="" /></a
+                  >{{tweet.reply.count}}
+                </figure>
+                <figure>
+                  <a href="{% url 'retweet' tweet.id %}"
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'retweet.png'%}"
+                      alt=""
+                  /></a>
+                  {{tweet.retweet.count}}
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'heart.png'%}"
+                      alt=""
+                  /></a>
+                  {{tweet.like.count}}
+                </figure>
+              </div>
+              <!-- <p>
+                <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
+              </p> -->
             </li>
             {%endfor%}
           </ul>
@@ -178,7 +191,6 @@
             <div class="noticia">
               <h2>{{noticia.title}}</h2>
               <br />
-              <h3>{{noticia.desc}}</h3>
             </div>
           </a>
           {%endfor%}

@@ -16,7 +16,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tweet',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tweets', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='tweets',
+                to=settings.AUTH_USER_MODEL),
         ),
         migrations.DeleteModel(
             name='User',

@@ -14,7 +14,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tweet',
             name='retweeted_from_tweet',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='retweet', to='main.tweet'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='retweet',
+                to='main.tweet'),
         ),
         migrations.DeleteModel(
             name='Comentarios',

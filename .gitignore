@@ -130,3 +130,9 @@ dmypy.json
 
 # VS Code Debug
 .vscode/
+
+# Trunk
+.trunk/
+.isort.cfg
+.markdownlint.yaml
+setup.cfg

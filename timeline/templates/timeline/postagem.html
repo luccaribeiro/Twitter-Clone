@@ -52,7 +52,7 @@
             </li>
 
             <li class="cabecalho__menuItem">
-              <img src="{%static 'profile.png'%}" alt="Perfil" />
+              <img src="{{ request.user.profile.avatar.url }}" alt="Perfil" />
               <a href="{% url 'perfil' user.username %}">Perfil</a>
             </li>
 
@@ -115,7 +115,7 @@
                           class="logo-int"
                           src="{%static 'heart.png'%}"
                           alt=""
-                      /></a>
+                      /></a>{{reply.like.count}}
                     </figure>
                 </div> 
               </div>
@@ -144,32 +144,44 @@
                 </div>
                 
                 <p>{{postagem_ref.content}}</p>
+
+                {% if postagem_ref.rt %}
+                <div>
+                  <div style="display: flex">
+                    <img
+                      src="{{postagem_ref.rt.user.avatar.url}}"
+                      alt="Imagem"
+                      style="border-radius: 50%; width: 50px"
+                    />
+                    <h4>
+                      <a href="{% url 'perfil' postagem_ref.rt.user %}"
+                        >{{postagem_ref.rt.user}}</a
+                      >
+                    </h4>
+                  </div>
+                  <p>{{postagem_ref.rt.content}}</p>
+                </div>
+                {% endif %}
                 <div class="interacao">
                   <figure>
-                      <a href=""
-                        ><img
-                          class="logo-int"
-                          src="{%static 'chat.png'%}"
-                          alt=""
-                      /></a>
-                    </figure>
-                    <figure>
-                      <a href=""
-                        ><img
-                          class="logo-int"
-                          src="{%static 'retweet.png'%}"
-                          alt=""
-                      /></a>
-                    </figure>
-                    <figure>
-                      <a href=""
-                        ><img
-                          class="logo-int"
-                          src="{%static 'heart.png'%}"
-                          alt=""
-                      /></a>
-                    </figure>
-                </div> 
+                    <a href="{% url 'retweet' postagem_ref.id %}"
+                    ><img
+                    style="width: 20px"
+                    class="logo-int"
+                    src="{%static 'retweet.png'%}"
+                    alt="" /></a
+                    >{{postagem_ref.retweet.count}}
+                  </figure>
+                  <figure>
+                    <a href=""
+                      ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'heart.png'%}"
+                      alt="" /></a
+                      >{{postagem_ref.like.count}}
+                  </figure>
+                </div>
               </div>
             </li>
           </ul>
@@ -199,7 +211,6 @@
             <div class="noticia">
               <h2>{{noticia.title}}</h2>
               <br />
-              <h3>{{noticia.desc}}</h3>
             </div>
           </a>
           {%endfor%}

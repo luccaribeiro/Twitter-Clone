@@ -1,6 +1,6 @@
 <title>Twitter</title>
 <h1>EDIÇÃO</h1>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" id="perfil_edit">
   {% csrf_token %}{{ form.as_p }}
   <button type="submit">Salvar Perfil</button>
 </form>

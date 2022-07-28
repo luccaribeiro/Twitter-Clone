@@ -1,0 +1,26 @@
+{%load static%} {% load humanize %} {%load static%} {% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retweet</title>
+  </head>
+  <body>
+    <div class="rt">
+      <form action="" method="post">
+        {% csrf_token %}{{ form.content }}
+        <button type="submit">Retweetar</button>
+      </form>
+    </div>
+    <div class="original_tweet">
+      <img
+        src="{{ref_tweet.user.avatar.url}}"
+        alt="{{ref_tweet.user.user}} avatar"
+      />
+      <h2>{{ref_tweet.user.user}}</h2>
+      <h4>{{ref_tweet.content}}</h4>
+    </div>
+  </body>
+</html>
