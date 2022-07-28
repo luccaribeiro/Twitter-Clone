@@ -63,7 +63,7 @@ class Like(models.Model):
         Profile, on_delete=models.CASCADE, related_name="like", null=True, blank=True
     )
     tweet = models.ForeignKey("Tweet", on_delete=models.CASCADE, related_name="like")
-    date = models.DateTimeField(timezone.now())
+    date = models.DateTimeField(default=timezone.now)
     count = models.BooleanField(default=False)
 
     class Meta:
