@@ -108,6 +108,7 @@ def edit_perfil(request, username):
             post = form.save(commit=False)
             usuario_perfil.nickname = post.nickname
             usuario_perfil.avatar = post.avatar
+            usuario_perfil.capa = post.capa
             usuario_perfil.bio = post.bio
             usuario_perfil.save()
             return redirect(reverse("perfil", args=[usuario_perfil.user.username]))

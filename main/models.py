@@ -12,7 +12,8 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=20, default=random_generator, unique=True)
     avatar = models.ImageField(default="default.jpg", upload_to="profile_images")
     bio = models.CharField(max_length=160, default="Passarinho azul")
-
+    capa = models.ImageField(default="default.jpg", upload_to="background_images")
+    
     def __str__(self):
         return self.user.username
 
