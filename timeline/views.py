@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from GoogleNews import GoogleNews
 
-from main.models import Profile, Reply, Tweet, Retweet
+from main.models import Profile, Tweet, Like
 
-from .forms import ProfileForm, PostForm, RtForm, ReplyForm
+from .forms import ProfileForm, PostForm
 
 googlenews = GoogleNews()
 googlenews = GoogleNews(period="d")
@@ -15,13 +16,7 @@ googlenews.search("Brasil")
 
 def principal(request):
     noticias = googlenews.results()
-    tweets_query = list(Tweet.objects.all())
-    rts = list(Retweet.objects.all())
-
-    tweets = []
-    for post in tweets_query + rts:
-        tweets.append(post)
-    tweets.sort(key=lambda x: x.created_on, reverse=True)
+    tweets = Tweet.objects.filter(reply_to__isnull=True).order_by('-created_on')
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -43,55 +38,60 @@ def principal(request):
 def postagem(request, id):
     noticias = googlenews.results()
     postagem_ref = Tweet.objects.get(id=id)
-    reply_list = Reply.objects.filter(reference_tweet=postagem_ref.id).order_by('created_on')
+    reply_list = Tweet.objects.filter(reply_to=postagem_ref.id).order_by('created_on')
 
     if request.method == "POST":
-        form = ReplyForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.user_id = int(Profile.objects.get(user=request.user.id).id)
-            post.reference_tweet_id = id
+            post.reply_to_id = id
+            post.num_type = 2
             post.save()
             return HttpResponseRedirect(request.path_info)
     else:
-        form = ReplyForm()
+        form = PostForm()
+
+    retweetado = None
+    if postagem_ref.retweets_the_id:
+        retweetado = Tweet.objects.get(id=postagem_ref.retweets_the_id)
     context = {
         "postagem_ref": postagem_ref,
         "form": form,
         "reply_list": reply_list,
         "noticias": noticias,
+        "retweetado": retweetado
     }
     return render(request, "timeline/postagem.html", context)
 
 
 def repost(request, id):
+    noticias = googlenews.results()
     ref_tweet = Tweet.objects.get(id=id)
+
     if request.method == 'POST':
-        form = RtForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             rt = form.save(commit=False)
             rt.user_id = Profile.objects.get(user_id=request.user.id).id
-            rt.original_tweet_id = id
+            rt.num_type = 1
+            rt.retweets_the_id = id
             rt.save()
             return redirect('timeline_page')
     else:
-        form = RtForm()
+        form = PostForm()
     context = {
         'ref_tweet': ref_tweet,
-        'form': form
+        'form': form,
+        'noticias': noticias
     }
     return render(request, "timeline/repost.html", context)
 
 
 def perfil(request, username):
     usuario_perfil = Profile.objects.get(user=User.objects.get(username=username).id)
-    tweets_query = list(Tweet.objects.filter(user=usuario_perfil.id))
-    rts = list(Retweet.objects.filter(user=usuario_perfil.id))
+    postagens = Tweet.objects.filter(user=usuario_perfil.id).filter(reply_to__isnull=True).order_by('-created_on')
 
-    postagens = []
-    for post in tweets_query + rts:
-        postagens.append(post)
-    postagens.sort(key=lambda x: x.created_on, reverse=True)
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
@@ -120,3 +120,13 @@ def edit_perfil(request, username):
         "form": form,
     }
     return render(request, "timeline/perfil_edit.html", context)
+
+
+def like(request, id):
+    try:
+        tweet_like = Like(user=Profile.objects.get(user=request.user.id), tweet=Tweet.objects.get(id=id))
+        tweet_like.save()
+    except IntegrityError:
+        like_delete = Like.objects.get(user=Profile.objects.get(user=request.user.id), tweet=Tweet.objects.get(id=id))
+        like_delete.delete()
+    return redirect('timeline_page')

@@ -69,10 +69,7 @@
 
             <li>
               <a class="foto-perfil" href="{% url 'perfil' user.username %}"
-                ><img
-                  src="{{ request.user.profile.avatar.url }}"
-                  alt="Perfil"
-                />Perfil</a
+                ><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a
               >
             </li>
 
@@ -120,20 +117,19 @@
                 <span> {{tweet.created_on | naturaltime}}</span>
               </div>
               <div class="texto-tuite">{{tweet.content}}</div>
-              {% if tweet.original_tweet_id %}
+              {% if tweet.retweets_the_id %}
               <div class="retuite">
                 <img
-                    src="{{tweet.original_tweet.user.avatar.url}}"
-                    alt="{{tweet.original_tweet.user.user.username}}"
+                  src="{{tweet.retweets_the.user.avatar.url}}"
+                  alt="{{tweet.retweets_the.user.user.username}}"
                 />
                 <div>
-                  <a href="">{{tweet.original_tweet.user.user.username}}</a>
+                  <a href="">{{tweet.retweets_the.user.user.username}}</a>
                   <span class="nickname-retuite">@{{tweet.user.nickname}}</span>
-                  <span> {{tweet.created_on | naturaltime}}</span>  
+                  <span> {{tweet.created_on | naturaltime}}</span>
                 </div>
-                <p class="texto-retuite">{{tweet.original_tweet.content}}</p>
+                <p class="texto-retuite">{{tweet.retweets_the.content}}</p>
               </div>
-              
               {% endif %}
               <div class="interacao">
                 <figure>
@@ -141,8 +137,9 @@
                     ><img
                       style="width: 20px"
                       src="{%static 'chat.png'%}"
-                      alt="" /></a
-                  ><div class="contador">{{tweet.reply.count}}</div>
+                      alt=""
+                  /></a>
+                  <div class="contador">{{tweet.reply.count}}</div>
                 </figure>
                 <figure>
                   <a href="{% url 'retweet' tweet.id %}"
@@ -155,7 +152,7 @@
                   <div class="contador">{{tweet.retweet.count}}</div>
                 </figure>
                 <figure>
-                  <a href=""
+                  <a href="{% url 'like' tweet.id %}"
                     ><img
                       style="width: 20px"
                       class="logo-int"

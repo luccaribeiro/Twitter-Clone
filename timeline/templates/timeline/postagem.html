@@ -66,7 +66,9 @@
       <main class="conteudoPrincipal">
         <!-- TÍTULO -->
         <h3 class="conteudoPrincipal__titulo">
-          <a href="{% url 'timeline_page' %}"><img src="{%static 'timeline/seta.png' %}" alt="">tweets</a>
+          <a href="{% url 'timeline_page' %}"
+            ><img src="{%static 'timeline/seta.png' %}" alt="" />tweets</a
+          >
         </h3>
 
         <!-- FORMULÁRIO -->
@@ -89,35 +91,34 @@
                 >
                 <div class="span">
                   <span>@{{reply.user.nickname}}</span>
-                <span style="margin-left: 5px;">{{reply.created_on | naturaltime}}</span>
+                  <span style="margin-left: 5px"
+                    >{{reply.created_on | naturaltime}}</span
+                  >
                 </div>
                 <p>{{reply.content}}</p>
                 <div class="interacao">
                   <figure>
-                      <a href=""
-                        ><img
-                          class="logo-int"
-                          src="{%static 'chat.png'%}"
-                          alt=""
-                      /></a>
-                    </figure>
-                    <figure>
-                      <a href=""
-                        ><img
-                          class="logo-int"
-                          src="{%static 'retweet.png'%}"
-                          alt=""
-                      /></a>
-                    </figure>
-                    <figure>
-                      <a href=""
-                        ><img
-                          class="logo-int"
-                          src="{%static 'heart.png'%}"
-                          alt=""
-                      /></a>{{reply.like.count}}
-                    </figure>
-                </div> 
+                    <a href=""
+                      ><img class="logo-int" src="{%static 'chat.png'%}" alt=""
+                    /></a>
+                  </figure>
+                  <figure>
+                    <a href=""
+                      ><img
+                        class="logo-int"
+                        src="{%static 'retweet.png'%}"
+                        alt=""
+                    /></a>
+                  </figure>
+                  <figure>
+                    <a href=""
+                      ><img
+                        class="logo-int"
+                        src="{%static 'heart.png'%}"
+                        alt="" /></a
+                    >{{reply.like.count}}
+                  </figure>
+                </div>
               </div>
             </li>
             {%endfor%}
@@ -140,55 +141,59 @@
                 >
                 <div class="span">
                   <span>@{{postagem_ref.user.nickname}}</span>
-                  <span style="margin-left: 5px;">{{postagem_ref.created_on | naturaltime}}</span>
+                  <span style="margin-left: 5px"
+                    >{{postagem_ref.created_on | naturaltime}}</span
+                  >
                 </div>
-                
+
                 <p>{{postagem_ref.content}}</p>
 
-                {% if postagem_ref.rt %}
+                {% if postagem_ref.retweets_the_id %}
                 <div>
                   <div style="display: flex">
                     <img
-                      src="{{postagem_ref.rt.user.avatar.url}}"
+                      src="{{retweetado.user.avatar.url}}"
                       alt="Imagem"
                       style="border-radius: 50%; width: 50px"
                     />
                     <h4>
-                      <a href="{% url 'perfil' postagem_ref.rt.user %}"
-                        >{{postagem_ref.rt.user}}</a
+                      <a href="{% url 'perfil' retweetado.user %}"
+                        >{{retweetado.user}}</a
                       >
                     </h4>
                   </div>
-                  <p>{{postagem_ref.rt.content}}</p>
+                  <p>{{retweetado.content}}</p>
                 </div>
                 {% endif %}
                 <div class="interacao">
                   <figure>
-                    <a href="{%url 'postagem' postagem_ref.id %}"
-                      >
+                    <a href="{%url 'postagem' postagem_ref.id %}">
                       <img
                         style="width: 20px"
                         src="{%static 'chat.png'%}"
-                        alt="" /></a
-                    ><div class="contador">{{postagem_ref.reply.count}}</div>
+                        alt=""
+                    /></a>
+                    <div class="contador">{{postagem_ref.reply.count}}</div>
                   </figure>
                   <figure>
                     <a href="{% url 'retweet' postagem_ref.id %}"
-                    ><img
-                    style="width: 20px"
-                    class="logo-int"
-                    src="{%static 'retweet.png'%}"
-                    alt="" /></a
-                    ><div class="contador">{{postagem_ref.retweet.count}}</div>
+                      ><img
+                        style="width: 20px"
+                        class="logo-int"
+                        src="{%static 'retweet.png'%}"
+                        alt=""
+                    /></a>
+                    <div class="contador">{{postagem_ref.retweet.count}}</div>
                   </figure>
                   <figure>
-                    <a href=""
+                    <a href="{% url 'like' postagem_ref.id %}"
                       ><img
-                      style="width: 20px"
-                      class="logo-int"
-                      src="{%static 'heart.png'%}"
-                      alt="" /></a
-                      ><div class="contador">{{postagem_ref.like.count}}</div>
+                        style="width: 20px"
+                        class="logo-int"
+                        src="{%static 'heart.png'%}"
+                        alt=""
+                    /></a>
+                    <div class="contador">{{postagem_ref.like.count}}</div>
                   </figure>
                 </div>
               </div>
