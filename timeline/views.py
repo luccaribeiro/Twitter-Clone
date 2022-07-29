@@ -65,6 +65,7 @@ def postagem(request, id):
 
 
 def repost(request, id):
+    noticias = googlenews.results()
     ref_tweet = Tweet.objects.get(id=id)
     if request.method == 'POST':
         form = RtForm(request.POST)
@@ -78,7 +79,8 @@ def repost(request, id):
         form = RtForm()
     context = {
         'ref_tweet': ref_tweet,
-        'form': form
+        'form': form,
+        'noticias': noticias
     }
     return render(request, "timeline/repost.html", context)
 
