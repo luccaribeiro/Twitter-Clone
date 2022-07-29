@@ -13,7 +13,7 @@ class Profile(models.Model):
     avatar = models.ImageField(default="default.jpg", upload_to="profile_images")
     bio = models.CharField(max_length=160, default="Passarinho azul")
     capa = models.ImageField(default="default.jpg", upload_to="background_images")
-    
+
     def __str__(self):
         return self.user.username
 
@@ -21,7 +21,10 @@ class Profile(models.Model):
 class Tweet(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="tweets")
     content = models.CharField(max_length=140)
+    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="reply")
+    retweets_the = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="retweet")
     created_on = models.DateTimeField(default=timezone.now)
+    num_type = models.IntegerField(default=0)
 
     class Meta:
         ordering = ["created_on"]
@@ -31,41 +34,13 @@ class Tweet(models.Model):
         return text
 
 
-class Reply(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="replies")
-    content = models.CharField(max_length=140, null=True)
-    created_on = models.DateTimeField(default=timezone.now)
-    reference_tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE, related_name="reply")
-
-    class Meta:
-        ordering = ["created_on"]
-
-    def __str__(self):
-        text = f"{self.user.user.username}: {self.original_tweet}"
-        return text
-
-
-class Retweet(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="retweets")
-    content = models.CharField(max_length=140, null=True)
-    created_on = models.DateTimeField(default=timezone.now)
-    original_tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE, related_name="retweet")
-
-    class Meta:
-        ordering = ["created_on"]
-
-    def __str__(self):
-        text = f"{self.user.user.username}: {self.original_tweet}"
-        return text
-
-
 class Like(models.Model):
     user = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name="like", null=True, blank=True
+        Profile, on_delete=models.CASCADE, related_name="user_like", null=True, blank=True
     )
-    tweet = models.ForeignKey("Tweet", on_delete=models.CASCADE, related_name="like")
+    tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE, related_name="like")
     date = models.DateTimeField(default=timezone.now)
-    count = models.BooleanField(default=False)
+#    count = models.BooleanField(default=False)
 
     class Meta:
         unique_together = [["user", "tweet"]]
