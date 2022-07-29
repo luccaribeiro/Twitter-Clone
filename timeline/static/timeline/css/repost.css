@@ -1,0 +1,169 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+body,
+html {
+    height: 100px;
+}
+
+.container {
+    display: flex;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+header > .logo-twitter > img {
+    width: 38px;
+    height: 38px;
+    margin: 16px 0 10px 258px;
+}
+
+.cabecalho-menulista {
+    display: flex;
+    flex-direction: column;
+    margin-left: 260px;
+    margin-top: 20px;
+    list-style: none;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li {
+    margin-bottom: 35px;
+    font-size: 23px;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li > a > img {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 35px;
+    margin-bottom: -8px;
+    margin-right: 20px;
+}
+
+.cabecalho-menulista > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+#formzinho{
+    outline: none;
+    border: none;
+    margin-left: 55px;
+    width: 515px;
+    margin-top: 17px;
+}
+
+.retuitar{
+    margin: 15px 0 0 432px;
+    border-radius: 40px;
+    width: 107px;
+    height: 34px;
+    font-size: 15px;
+    border: 0.5px solid #e7ecf0;
+    background-color: rgb(47 161 242);
+    position: absolute;
+    color: white;
+    top: 26.5%;
+    left: 31.5%;
+}
+
+.caixa-retuite{
+    border: 1px solid #e7ecf0;
+    margin: 90px 0 0 123px;
+    width: 637px;
+    height: 230px;
+}
+
+.retuite{
+    border: 1px solid transparent;
+}
+
+.tuite-original{
+    display: flex;
+    text-align: center;
+    border: 1px solid #e7ecf0;
+    width: 524px;
+    height: 81px;
+    margin: 17px 0 0 50px;
+    border-radius: 15px;
+}
+
+.tuite-original > img{
+    border-radius: 50%;
+    width: 56px;
+    height: 58px;
+    margin: 5px 0 0 10px;
+}
+
+.tuite-original > a{
+    font-size: 20px;
+    font-weight: lighter;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid transparent; 
+    margin: 13px 0 0 10px;
+}
+
+.tuite-original > span{
+    margin-left: 7px;
+    font-size: 12px;
+    color: grey;
+    margin-top: 18px;
+}
+
+.tuite-original > h4{
+    margin: 50px 0 0 -333px;
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+.barra-3{
+    margin-left: 34px;
+}
+
+#wrap {
+    margin: 14px 0 0 57px;
+}
+  
+#search-query {
+width: 301px;
+height: 30px;
+font-family: "Helvetica Neue", Arial, sans-serif;
+font-size: 13px;
+padding: 6px 30px 6px 19px;
+background-color: #eff3f4;
+border: none;
+border-radius: 200px;
+box-shadow: 0px 1px 2px rgb(0 0 0 / 20%) inset;
+}
+
+.noticias {
+margin-left: 56px;
+margin-top: 26px;
+border-radius: 15px;
+background-color: #eff1f180;
+width: 360px;
+padding: 10px;
+}
+
+.noticias > h1 {
+font-size: 30px;
+margin-bottom: 40px;
+}
+
+.noticia > h2 {
+font-size: 20px;
+}
+
+.noticia {
+margin-bottom: 37px;
+}
+
+.link-noticia {
+text-decoration: none;
+color: inherit;
+}

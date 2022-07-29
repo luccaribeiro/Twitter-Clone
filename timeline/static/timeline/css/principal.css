@@ -31,8 +31,8 @@ header > .logo-twitter > img {
 }
 
 .cabecalho-menunav > .cabecalho-menulista > li {
-  margin-bottom: 35px;
-  font-size: 23px;
+margin-bottom: 35px;
+font-size: 23px;
 }
 
 .cabecalho-menunav > .cabecalho-menulista > li > a > img {
@@ -88,9 +88,9 @@ header > .logo-twitter > img {
 }
 
 .borda-caixatt{
-    border-bottom: 1px solid #e7ecf0;
-    width: 500px;
-    margin-left: 140px;
+  border-bottom: 1px solid #e7ecf0;
+  width: 500px;
+  margin-left: 140px;
 }
 
 .tuite{
@@ -106,53 +106,53 @@ header > .logo-twitter > img {
 }
 
 .borda-tuitar{
-    border-bottom: 1px solid #e7ecf0;
-    margin-top: 5px;
+  border-bottom: 1px solid #e7ecf0;
+  margin-top: 5px;
 }
 
 .conteudo-tuite{
-    border-bottom: 1px solid #e7ecf0;
+  border-bottom: 1px solid #e7ecf0;
 }
 
 .img-time {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
+display: flex;
+align-items: center;
+margin-left: 10px;
 }
 
 .img-time > img {
-  border-radius: 50%;
-  width: 60px;
-  margin-top: 10px;
+border-radius: 50%;
+width: 60px;
+margin-top: 10px;
 }
 
 .img-time > a {
-  margin-left: 10px;
-  text-decoration: none;
-  color: black;
-  border-bottom: solid 1px transparent;
-  font-size: 20px;
-  margin-top: -11px;
+margin-left: 10px;
+text-decoration: none;
+color: black;
+border-bottom: solid 1px transparent;
+font-size: 20px;
+margin-top: -11px;
 }
 
 .img-time > a:hover {
-  border-bottom: solid 1px black;
+border-bottom: solid 1px black;
 }
 
 .nickname,
 span {
-    margin-left: 7px;
-    font-size: 12px;
-    color: grey;
-    margin-top: -11px;
+  margin-left: 7px;
+  font-size: 12px;
+  color: grey;
+  margin-top: -11px;
 }
 
 .texto-tuite{
-    margin-left: 81px;
-    text-decoration: none;
-    font-size: 18px;
-    color: black;
-    margin-top: -20px;
+  margin-left: 81px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  margin-top: -20px;
 }
 
 .retuite{
@@ -188,7 +188,7 @@ span {
 
 .retuite > .texto-retuite{
   margin-top: 54px!important;
-    margin-left: -324px;
+  margin-left: -324px;
 }
 
 .retuite > .texto-retuite:hover{
