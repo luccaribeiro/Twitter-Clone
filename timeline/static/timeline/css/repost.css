@@ -53,7 +53,7 @@ header > .logo-twitter > img {
     outline: none;
     border: none;
     margin-left: 55px;
-    width: 400px;
+    width: 515px;
     margin-top: 17px;
 }
 
@@ -68,30 +68,28 @@ header > .logo-twitter > img {
     position: absolute;
     color: white;
     top: 26.5%;
-    left: 30%;
+    left: 31.5%;
 }
 
 .caixa-retuite{
     border: 1px solid #e7ecf0;
-    margin: 90px 0 0 169px;
-    width: 550px;
+    margin: 90px 0 0 123px;
+    width: 637px;
     height: 230px;
 }
 
 .retuite{
     border: 1px solid transparent;
-
 }
 
 .tuite-original{
     display: flex;
     text-align: center;
     border: 1px solid #e7ecf0;
-    width: 450px;
+    width: 524px;
     height: 81px;
     margin: 17px 0 0 50px;
     border-radius: 15px;
-
 }
 
 .tuite-original > img{
@@ -110,11 +108,6 @@ header > .logo-twitter > img {
     margin: 13px 0 0 10px;
 }
 
-/* .tuite-original > a:hover{
-    border-bottom: solid 1px black;
-
-} */
-
 .tuite-original > span{
     margin-left: 7px;
     font-size: 12px;
@@ -128,3 +121,49 @@ header > .logo-twitter > img {
     font-size: 18px;
 }
 
+.barra-3{
+    margin-left: 34px;
+}
+
+#wrap {
+    margin: 14px 0 0 57px;
+}
+  
+#search-query {
+width: 301px;
+height: 30px;
+font-family: "Helvetica Neue", Arial, sans-serif;
+font-size: 13px;
+padding: 6px 30px 6px 19px;
+background-color: #eff3f4;
+border: none;
+border-radius: 200px;
+box-shadow: 0px 1px 2px rgb(0 0 0 / 20%) inset;
+}
+
+.noticias {
+margin-left: 56px;
+margin-top: 26px;
+border-radius: 15px;
+background-color: #eff1f180;
+width: 360px;
+padding: 10px;
+}
+
+.noticias > h1 {
+font-size: 30px;
+margin-bottom: 40px;
+}
+
+.noticia > h2 {
+font-size: 20px;
+}
+
+.noticia {
+margin-bottom: 37px;
+}
+
+.link-noticia {
+text-decoration: none;
+color: inherit;
+}
