@@ -30,10 +30,12 @@ header{
 .noticias h1{
     font-size: 30px;
     margin-bottom: 40px;
+    font-weight: normal;
 }
 
 .noticia h2{
     font-size: 20px;
+    font-weight: normal;
 }
 
 .noticia{
@@ -82,6 +84,10 @@ figure{
     height: 28px;
     margin-bottom: -8px;
     margin-right: 20px;
+}
+
+.cabecalho__menuItem > .foto-perfil{
+    border-radius: 50%;
 }
 
 .cabecalho__menuItem > a{
@@ -180,15 +186,66 @@ figure{
     width: 228px;
 }
 
+.tweet__conteudo > .caixa-retuite{
+    display: flex;
+    text-align: center;
+    border: 1px solid #e7ecf0;
+    width: 540px;
+    height: 102px;
+    margin: 17px 0 0 -5px;
+    border-radius: 15px;
+}
+.caixa-retuite > img {
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    margin: 11px 0 0 10px;
+}
+
+.caixa-retuite > h4{
+    margin: 13px 0 0 10px;
+}
+
+.caixa-retuite > h4 > a{
+    font-size: 20px;
+    font-weight: lighter;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid transparent;
+
+}
+
+.caixa-retuite > .span {
+    margin-left: 7px;
+    font-size: 12px;
+    color: grey;
+    margin-top: 18px;
+}
+
+
+.tweet__conteudo > .texto-tuite{
+    margin: -57px 0 0 63px;
+    width: 453px;
+}
+
 .interacao{
     display: flex;
     margin-top: 12px;
     justify-content: space-between;
 }
 
+.interacao-rt{
+    display: flex;
+    margin-top: 38px;
+    justify-content: space-evenly;
+    margin-left: -156px;
+}
+
+.logo-int-rt, 
 .logo-int{
     width: 20px;
 }
+
 
 .tweet__conteudo > a {
     text-decoration: none;
@@ -199,9 +256,9 @@ figure{
 }
 
 .tweet__conteudo > p{
-    margin-top: 20px;
+    margin-top: 13px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 17px;
     color: black;
 }
 
