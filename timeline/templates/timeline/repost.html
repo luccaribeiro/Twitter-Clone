@@ -89,11 +89,8 @@
           <a href="">{{ref_tweet.user.user}}</a>
           <span class="nickname-retuite">@{{ref_tweet.user.nickname}}</span>
           <span>{{ref_tweet.created_on | naturaltime}}</span>  
-          <h4>{{ref_tweet.content}}</h4>
         </div>
-        <form action="" method="post">
-          {% csrf_token %}
-        </form>
+        <div class="texto-retuite"><p>{{ref_tweet.content}}</p></div>
       </div>
 
       <!-- ---- api noticias ----- -->

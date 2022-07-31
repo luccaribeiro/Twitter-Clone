@@ -52,7 +52,7 @@
             </li>
 
             <li class="cabecalho__menuItem">
-              <img src="{{ request.user.profile.avatar.url }}" alt="Perfil" />
+              <img class="foto-perfil" src="{{ request.user.profile.avatar.url }}" alt="Perfil" />
               <a href="{% url 'perfil' user.username %}">Perfil</a>
             </li>
 
@@ -100,7 +100,7 @@
                   <figure>
                     <a href=""
                       ><img class="logo-int" src="{%static 'chat.png'%}" alt=""
-                    /></a>
+                    /></a><div class="contador">{{reply.reply.count}}</div>
                   </figure>
                   <figure>
                     <a href=""
@@ -108,7 +108,7 @@
                         class="logo-int"
                         src="{%static 'retweet.png'%}"
                         alt=""
-                    /></a>
+                    /></a><div class="contador">{{reply.retweet.count}}</div>
                   </figure>
                   <figure>
                     <a href=""
@@ -116,7 +116,7 @@
                         class="logo-int"
                         src="{%static 'heart.png'%}"
                         alt="" /></a
-                    >{{reply.like.count}}
+                    ><div class="contador">{{reply.like.count}}</div>
                   </figure>
                 </div>
               </div>
@@ -145,31 +145,32 @@
                     >{{postagem_ref.created_on | naturaltime}}</span
                   >
                 </div>
-
                 <p>{{postagem_ref.content}}</p>
-
                 {% if postagem_ref.retweets_the_id %}
-                <div>
-                  <div style="display: flex">
-                    <img
-                      src="{{retweetado.user.avatar.url}}"
-                      alt="Imagem"
-                      style="border-radius: 50%; width: 50px"
-                    />
-                    <h4>
-                      <a href="{% url 'perfil' retweetado.user %}"
-                        >{{retweetado.user}}</a
-                      >
-                    </h4>
+                <div class="caixa-retuite">
+                  <img
+                    src="{{retweetado.user.avatar.url}}"
+                    alt="Imagem"
+                  />
+                  <h4>
+                    <a href="{% url 'perfil' retweetado.user %}"
+                      >{{retweetado.user}}</a
+                    >
+                  </h4>
+                  <div class="span">
+                    <span>@{{postagem_ref.user.nickname}}</span>
+                    <span style="margin-left: 5px"
+                      >{{postagem_ref.created_on | naturaltime}}</span
+                    >
                   </div>
-                  <p>{{retweetado.content}}</p>
                 </div>
+                <div class="texto-tuite"><p>{{retweetado.content}}</p></div>
                 {% endif %}
-                <div class="interacao">
+                <div class="interacao-rt">
                   <figure>
                     <a href="{%url 'postagem' postagem_ref.id %}">
                       <img
-                        style="width: 20px"
+                        class="logo-int-rt"
                         src="{%static 'chat.png'%}"
                         alt=""
                     /></a>
@@ -178,8 +179,7 @@
                   <figure>
                     <a href="{% url 'retweet' postagem_ref.id %}"
                       ><img
-                        style="width: 20px"
-                        class="logo-int"
+                        class="logo-int-rt"
                         src="{%static 'retweet.png'%}"
                         alt=""
                     /></a>
@@ -188,8 +188,7 @@
                   <figure>
                     <a href="{% url 'like' postagem_ref.id %}"
                       ><img
-                        style="width: 20px"
-                        class="logo-int"
+                        class="logo-int-rt"
                         src="{%static 'heart.png'%}"
                         alt=""
                     /></a>

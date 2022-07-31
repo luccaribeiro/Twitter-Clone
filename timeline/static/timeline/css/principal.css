@@ -190,8 +190,8 @@ span {
 
 
 .texto-retuite{
-  margin-top: -44px;
-  margin-left: 151px;
+  margin: -50px 0 0 151px;
+  width: 460px;
 }
 
 .texto-retuite:hover{

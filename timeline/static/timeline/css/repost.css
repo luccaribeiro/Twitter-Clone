@@ -36,6 +36,10 @@ header > .logo-twitter > img {
     font-size: 23px;
 }
 
+.cabecalho-menunav > .cabecalho-menulista > li > .foto-perfil > img {
+    border-radius: 50%;
+}
+
 .cabecalho-menunav > .cabecalho-menulista > li > a > img {
     width: 28px;
     height: 28px;
@@ -67,15 +71,15 @@ header > .logo-twitter > img {
     background-color: rgb(47 161 242);
     position: absolute;
     color: white;
-    top: 26.5%;
-    left: 31.5%;
+    top: 28.7%;
+    left: 32.1%;
 }
 
 .caixa-retuite{
     border: 1px solid #e7ecf0;
     margin: 90px 0 0 123px;
     width: 637px;
-    height: 230px;
+    height: 251px;
 }
 
 .retuite{
@@ -86,17 +90,17 @@ header > .logo-twitter > img {
     display: flex;
     text-align: center;
     border: 1px solid #e7ecf0;
-    width: 524px;
-    height: 81px;
+    width: 540px;
+    height: 102px;
     margin: 17px 0 0 50px;
     border-radius: 15px;
 }
 
 .tuite-original > img{
     border-radius: 50%;
-    width: 56px;
-    height: 58px;
-    margin: 5px 0 0 10px;
+    width: 46px;
+    height: 46px;
+    margin: 11px 0 0 10px;
 }
 
 .tuite-original > a{
@@ -115,10 +119,13 @@ header > .logo-twitter > img {
     margin-top: 18px;
 }
 
-.tuite-original > h4{
-    margin: 50px 0 0 -281px;
-    font-weight: lighter;
-    font-size: 18px;
+.caixa-retuite > .texto-retuite{
+    margin: -57px 0 0 119px;
+    width: 453px;
+}
+  
+.caixa-retuite > .texto-retuite:hover{
+    border: none!important;
 }
 
 .barra-3{
@@ -130,40 +137,42 @@ header > .logo-twitter > img {
 }
   
 #search-query {
-width: 301px;
-height: 30px;
-font-family: "Helvetica Neue", Arial, sans-serif;
-font-size: 13px;
-padding: 6px 30px 6px 19px;
-background-color: #eff3f4;
-border: none;
-border-radius: 200px;
-box-shadow: 0px 1px 2px rgb(0 0 0 / 20%) inset;
+    width: 301px;
+    height: 30px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    padding: 6px 30px 6px 19px;
+    background-color: #eff3f4;
+    border: none;
+    border-radius: 200px;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 20%) inset;
 }
 
 .noticias {
-margin-left: 56px;
-margin-top: 26px;
-border-radius: 15px;
-background-color: #eff1f180;
-width: 360px;
-padding: 10px;
+    margin-left: 56px;
+    margin-top: 26px;
+    border-radius: 15px;
+    background-color: #eff1f180;
+    width: 360px;
+    padding: 10px;
 }
 
 .noticias > h1 {
-font-size: 30px;
-margin-bottom: 40px;
+    font-size: 30px;
+    margin-bottom: 40px;
+    font-weight: normal;
 }
 
 .noticia > h2 {
-font-size: 20px;
+    font-size: 20px;
+    font-weight: normal;
 }
 
 .noticia {
-margin-bottom: 37px;
+    margin-bottom: 37px;
 }
 
 .link-noticia {
-text-decoration: none;
-color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
