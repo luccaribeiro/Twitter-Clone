@@ -69,7 +69,10 @@
 
             <li>
               <a class="foto-perfil" href="{% url 'perfil' user.username %}"
-                ><img src="{%static 'profile.png'%}" alt="Perfil" />Perfil</a
+                ><img
+                  src="{{ request.user.profile.avatar.url }}"
+                  alt="Perfil"
+                />Perfil</a
               >
             </li>
 
@@ -128,8 +131,8 @@
                   <span class="nickname-retuite">@{{tweet.user.nickname}}</span>
                   <span> {{tweet.created_on | naturaltime}}</span>
                 </div>
-                <p class="texto-retuite">{{tweet.retweets_the.content}}</p>
               </div>
+              <div class="texto-retuite"><p>{{tweet.retweets_the.content}}</p></div>
               {% endif %}
               <div class="interacao">
                 <figure>

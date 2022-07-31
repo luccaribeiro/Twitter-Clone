@@ -188,13 +188,13 @@ span {
   border-bottom: solid 1px black;
 }
 
-.retuite > .texto-retuite{
-  margin-top: 54px!important;
-  margin-left: -264px;
-  width: 350px;
+
+.texto-retuite{
+  margin-top: -44px;
+  margin-left: 151px;
 }
 
-.retuite > .texto-retuite:hover{
+.texto-retuite:hover{
   border: none!important;
 }
 
@@ -244,7 +244,7 @@ span {
 .interacao {
   margin-left: 79px;
   display: flex;
-  margin-top: 28px;
+  margin-top: 48px;
   margin-bottom: 7px;
 }
 
