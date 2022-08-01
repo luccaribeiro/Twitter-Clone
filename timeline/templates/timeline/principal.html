@@ -89,11 +89,12 @@
         <h3 class="conteudo-titulo">Página inicial</h3>
         <!-- FORMULÁRIO -->
         <div class="caixa-tuite">
-          <img
+          <a href="/perfil/lauranascimento/">  <img
             class="tuiteimagem-perfil"
             src="{{ request.user.profile.avatar.url }}"
             alt="Imagem"
-          />
+          /></a>
+        
           <form class="conteudo-formulario" method="post">
             {% csrf_token %} {{ form.content }}
             <p class="borda-caixatt"></p>

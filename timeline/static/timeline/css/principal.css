@@ -169,8 +169,8 @@ span {
 
 .retuite > img{
   border-radius: 50%;
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   margin: 16px 10px 0px 16px;
 }
 
@@ -190,7 +190,7 @@ span {
 
 
 .texto-retuite{
-  margin: -50px 0 0 147px;
+  margin: -50px 0 0 151px;
   width: 460px;
 }
 
@@ -245,7 +245,7 @@ span {
   margin-left: 79px;
   display: flex;
   margin-top: 48px;
-  margin-bottom: 16px;
+  margin-bottom: 7px;
 }
 
 figure {
