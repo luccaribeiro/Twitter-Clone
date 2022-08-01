@@ -69,10 +69,7 @@
 
             <li>
               <a class="foto-perfil" href="{% url 'perfil' user.username %}"
-                ><img
-                  src="{{ request.user.profile.avatar.url }}"
-                  alt="Perfil"
-                />Perfil</a
+                ><img src="{% static 'profile.png' %}" alt="Perfil" />Perfil</a
               >
             </li>
 
@@ -99,6 +96,14 @@
             <p class="borda-caixatt"></p>
             <button class="tuite" type="submit">Tweetar</button>
             <p class="borda-tuitar"></p>
+            {% if messages %} {% for message in messages %}
+            <p
+              class="messages"
+              style="color: red; position: absolute; top: 23%; left: 37%"
+            >
+              {{message}}
+            </p>
+            {% endfor %} {% endif %}
           </form>
         </div>
 
@@ -132,7 +137,9 @@
                   <span> {{tweet.created_on | naturaltime}}</span>
                 </div>
               </div>
-              <div class="texto-retuite"><p>{{tweet.retweets_the.content}}</p></div>
+              <div class="texto-retuite">
+                <p>{{tweet.retweets_the.content}}</p>
+              </div>
               {% endif %}
               <div class="interacao">
                 <figure>

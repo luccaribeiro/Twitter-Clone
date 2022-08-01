@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
@@ -22,9 +23,14 @@ def principal(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user_id = Profile.objects.get(user=request.user.id).id
-            post.save()
-            return redirect("main:timeline_page")
+            if post.content:
+                post.user_id = Profile.objects.get(user=request.user.id).id
+                post.save()
+                return redirect("main:timeline_page")
+            else:
+                messages.warning(request, "Por favor, preencha esse campo.")
+                return redirect("main:timeline_page")
+
     else:
         form = PostForm()
     context = {
@@ -47,8 +53,12 @@ def postagem(request, id):
             post.user_id = int(Profile.objects.get(user=request.user.id).id)
             post.reply_to_id = id
             post.num_type = 2
-            post.save()
-            return HttpResponseRedirect(request.path_info)
+            if post.content:
+                post.save()
+                return HttpResponseRedirect(request.path_info)
+            else:
+                messages.warning(request, "Por favor, preencha esse campo.")
+                return redirect(request.path_info)
     else:
         form = PostForm()
 
