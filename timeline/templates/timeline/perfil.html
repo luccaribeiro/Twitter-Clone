@@ -1,17 +1,127 @@
-<title>Twitter</title>
-<h1>nome do usuario: {{request.user.username}}</h1>
-<img src="{{ usuario_perfil.avatar.url }}" alt="Avatar" />
-<h3>{{usuario_perfil.nickname}}</h3>
-<p>{{usuario_perfil.bio}}</p>
-<h2>Lista de Tweets</h2>
-<ul>
-  {%for tweet in postagens%}
-  <li>{{tweet.content}}</li>
-  <br /><br /><br /><br /><br />
-  {%endfor%}
-</ul>
-{%if request.user.username != usuario_perfil.user.username%}
-<button>Seguir</button>
-{%else%}
-<a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a>
-{%endif%}
+{%load static%} {% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}">
+    <title>Perfil</title>
+  </head>
+  <body>
+      <div class="container">
+        <header>
+          <figure class="logo-twitter">
+            <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
+          </figure>
+          <nav class="cabecalho-menunav">
+            <ul class="cabecalho-menulista">
+              <li>
+                <a href="{% url 'timeline_page' %}"
+                  ><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página
+                  Inicial</a
+                >
+              </li>
+              <li>
+                <a href=""
+                  ><img
+                    src="{%static 'Hashtag.png'%}"
+                    alt="Explorar"
+                  />Explorar</a
+                >
+              </li>
+              <li>
+                <a href=""
+                  ><img
+                    src="{%static 'Notification.png'%}"
+                    alt="Notificações"
+                  />Notificações</a
+                >
+              </li>
+              <li>
+                <a href=""
+                  ><img
+                    src="{%static 'Group.png'%}"
+                    alt="Mensagens"
+                  />Mensagens</a
+                >
+              </li>
+              <li>
+                <a href="">
+                  <img src="{%static 'saved.png'%}" alt="Itens salvos" />Itens
+                  salvos</a
+                >
+              </li>
+              <li>
+                <a href=""
+                  ><img src="{%static 'listas.png'%}" alt="Listas" />Listas</a
+                >
+              </li>
+              <li>
+                <a class="foto-perfil" href="{% url 'perfil' user.username %}"
+                  ><img
+                    src="{{ request.user.profile.avatar.url }}"
+                    alt="Perfil"
+                  />Perfil</a
+                >
+              </li>
+              <li>
+                <a href=""><img src="{%static 'more.png'%}" alt="Mais" />Mais</a>
+              </li>
+            </ul>
+          </nav>
+        </header> 
+        <div class="perfil-tuites">
+          <div class="caixa-perfil">
+            <img class="capa" src="{{usuario_perfil.capa.url}}" alt="">
+            <img class="foto-perfil" src="{{ usuario_perfil.avatar.url }}" alt="Avatar" />
+            <h1>{{request.user.username}}</h1>
+            <h3>@{{usuario_perfil.nickname}}</h3>
+            <p>{{usuario_perfil.bio}}</p>
+          </div>
+          <h2>Lista de Tweets</h2>
+          <ul>
+            {%for tweet in postagens%}
+            <li>{{tweet.content}}</li>
+            <br /><br /><br /><br /><br />
+            {%endfor%}
+          </ul>
+          {%if request.user.username != usuario_perfil.user.username%}
+          <button>Seguir</button>
+          {%else%}
+          <a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a>
+          {%endif%}
+        </div>
+        <section class="barra-3">
+          <div id="wrap">
+            <form
+              id="nav-search"
+              class="form-search"
+              action="/search"
+              role="search"
+            >
+              <input
+                id="search-query"
+                class="search-input"
+                type="text"
+                placeholder="Search"
+              />
+              <button class="icon" type="submit"></button>
+            </form>
+          </div>
+          <section class="noticias">
+            <h1>O que está acontecendo</h1>
+            {%for noticia in noticias%}
+            <a class="link-noticia" target="_blank" href="{{noticia.link}}">
+              <div class="noticia">
+                <h2>{{noticia.title}}</h2>
+                <br />
+              </div>
+            </a>
+            {%endfor%}
+          </section>
+        </section>
+      </div>
+  </body>
+</html>

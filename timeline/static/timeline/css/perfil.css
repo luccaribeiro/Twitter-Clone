@@ -1,0 +1,70 @@
+* {
+margin: 0%;
+padding: 0%;
+}
+
+body,
+html {
+height: 100px;
+}
+
+.container {
+display: flex;
+}
+
+header {
+display: flex;
+flex-direction: column;
+}
+
+header > .logo-twitter > img {
+width: 38px;
+height: 38px;
+margin: 16px 0 10px 258px;
+}
+
+.cabecalho-menulista {
+display: flex;
+flex-direction: column;
+margin-left: 260px;
+margin-top: 20px;
+list-style: none;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li {
+margin-bottom: 35px;
+font-size: 23px;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li > a > img {
+width: 28px;
+height: 28px;
+margin-bottom: 35px;
+margin-bottom: -8px;
+margin-right: 20px;
+}
+
+.cabecalho-menulista > li > a {
+text-decoration: none;
+color: black;
+}
+
+.cabecalho-menunav > .cabecalho-menulista > li > .foto-perfil > img {
+width: 29px;
+height: 29px;
+border-radius: 50%;
+}
+
+.perfil-tuites{
+    border: solid 1px #e7ecf0;
+}
+
+.caixa-perfil{
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-tuites >.caixa-perfil > .capa {
+    width: 300px;
+    height: 300px;
+}
