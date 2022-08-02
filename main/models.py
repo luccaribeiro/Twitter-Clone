@@ -20,7 +20,7 @@ class Profile(models.Model):
 
 class Tweet(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="tweets")
-    content = models.CharField(max_length=140)
+    content = models.CharField(max_length=140, null=True, blank=True)
     reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="reply")
     retweets_the = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="retweet")
     created_on = models.DateTimeField(default=timezone.now)

@@ -5,6 +5,7 @@ from main.models import Profile, Tweet
 
 class PostForm(forms.ModelForm):
     content = forms.CharField(
+        required=False,
         widget=forms.Textarea(
             attrs={
                 "class": "form-control w-100",
