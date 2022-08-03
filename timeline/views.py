@@ -9,13 +9,13 @@ from main.models import Like, Profile, Relationship, Tweet
 from .forms import PostForm, ProfileForm
 
 googlenews = GoogleNews()
-googlenews = GoogleNews(period="d")
-googlenews = GoogleNews(lang="pt", region="BR")
-googlenews.search("Brasil")
+googlenews = GoogleNews(period='d')
+googlenews = GoogleNews(lang='pt', region='BR')
+googlenews.search('BRASIL')
+noticias = googlenews.results()
 
 
 def principal(request):
-    noticias = googlenews.results()
     tweets = Tweet.objects.filter(
         reply_to__isnull=True).order_by('-created_on')
 
@@ -108,6 +108,7 @@ def perfil(request, username):
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
+        "noticias": noticias,
     }
     return render(request, "timeline/perfil.html", context)
 
