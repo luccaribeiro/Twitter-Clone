@@ -102,7 +102,7 @@ border-radius: 50%;
     display: flex;
     flex-direction: column;
     width: 300px;
-    margin: 52px 0 20px 18px;
+    margin: 52px 0 16px 18px;
 }
 
 .caixa-perfil > .infos-basica > h1{
@@ -111,14 +111,14 @@ border-radius: 50%;
 
 .caixa-perfil > .infos-basica > h3{
     font-size: 17px;
-    color: #c1c1c1;
+    color: #536471;
     font-weight: normal;
 }
 
 .caixa-perfil > .infos-basica > p{
-    font-size: 17.5px;
-    margin-top: 30px;
-    width: 621px;
+  font-size: 17.5px;
+  margin-top: 17px;
+  width: 621px;
 }
 
 .botoes > .edit-perfil{
@@ -139,6 +139,124 @@ border-radius: 50%;
     border: none;
     color: black;
     font-weight: 600;
+}
+
+.calendario{
+  margin: 0 0 10px 16px;
+  display: flex;
+  align-items: center;
+  color: #536471;
+  font-size: 16px;
+}
+
+.calendario > img {
+  width: 22px;
+  margin-right: 10px;
+}
+
+.seguidores{
+  display: flex;
+  width: 252px;
+  justify-content: space-between;
+  margin-left: 15px;
+  font-size: 18px;
+}
+
+.seguidores > p{
+  color:#536471;
+}
+
+.seguidores > p > span{
+  font-weight: bold;
+  color: black;
+}
+
+.menu{
+  margin-top: 30px;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  font-size: 19px;
+}
+
+.menu > li{
+  padding: 18px;
+  color: #536471;
+}
+
+.menu > li:hover{
+  background-color: #cdd3d380;
+}
+
+.conteudo-listatuites{
+  list-style: none;
+}
+
+.conteudo-tuite{
+  border-bottom: 1px solid #e7ecf0;
+  margin: 15px 0 20px 2px;
+}
+
+.img-time {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.img-time > img {
+  border-radius: 50%;
+  width: 60px;
+  margin-top: 10px;
+}
+
+.img-time > a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: black;
+  border-bottom: solid 1px transparent;
+  font-size: 13px;
+  margin-top: -11px;
+}
+
+.img-time > a:hover {
+  border-bottom: solid 1px black;
+}
+
+.img-time > a > h2{
+  font-weight: 100;
+}
+
+.nickname,
+.criado {
+  margin-left: 7px;
+  font-size: 12px;
+  color: grey;
+  margin-top: -11px;
+}
+
+.texto-tuite{
+  margin-left: 81px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  margin-top: -20px;
+}
+
+.interacao {
+  margin-left: 79px;
+  display: flex;
+  margin-top: 48px;
+  margin-bottom: 7px;
+}
+
+figure {
+  display: flex;
+  width: 32%;
+}
+
+.contador{
+  margin-left: 5px;
+  margin-top: 3px;
 }
 
 
@@ -172,6 +290,7 @@ border-radius: 50%;
   .noticias > h1 {
     font-size: 30px;
     margin-bottom: 40px;
+    font-weight:normal;
   }
   
   .noticia > h2 {

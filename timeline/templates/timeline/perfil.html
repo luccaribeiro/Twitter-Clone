@@ -61,7 +61,7 @@
               <li>
                 <a class="foto-perfil" href="{% url 'perfil' user.username %}"
                   ><img
-                    src="{{ request.user.profile.avatar.url }}"
+                    src="{% static 'profile.png' %}"
                     alt="Perfil"
                   />Perfil</a
                 >
@@ -84,6 +84,17 @@
               <h3>@{{usuario_perfil.nickname}}</h3>
               <p>{{usuario_perfil.bio}}</p>
             </div>
+            <p class="calendario"><img src="{% static 'calendario-perfil.png' %}" alt=""> ingressou em (ADICIONAR MES E ANO)</p>
+            <div class="seguidores">
+              <p><span>100</span> seguindo</p>  
+              <p><span>100</span> seguidores</p>   
+            </div>
+            <ul class="menu">
+              <li>Tweets</li>
+              <li>Tweets e respostas</li>
+              <li>Mídia</li>
+              <li>Curtidas</li>
+            </ul>
             <div class="botoes">
               {%if request.user.username != usuario_perfil.user.username%}
               <button class="botao-seguir">Seguir</button>
@@ -92,10 +103,55 @@
               {%endif%}
             </div>
           </div>
-          <ul>
+          <ul class="conteudo-listatuites">
             {%for tweet in postagens%}
-            <li>{{tweet.content}}</li>
-            {%endfor%}
+            <!-- Tweet indivual -->
+            <li class="conteudo-tuite">
+              <!-- foto perfil -->
+              <div class="img-time">
+                <img src="{{ tweet.user.avatar.url }}" alt="Imagem" />
+                <!--USUÁRIO -->
+                <a href="{% url 'perfil' tweet.user %}"
+                  ><h2>{{tweet.user}}</h2>
+                </a>
+                <span class="nickname">@{{tweet.user.nickname}}</span>
+                <span class="criado"> {{tweet.created_on | naturaltime}}</span>
+              </div>
+              <div class="texto-tuite">{{tweet.content}}</div>
+              <div class="interacao">
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      src="{%static 'chat.png'%}"
+                      alt=""
+                  /></a>
+                  <div class="contador">{{tweet.reply.count}}</div>
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'retweet.png'%}"
+                      alt=""
+                  /></a>
+                  <div class="contador">{{tweet.retweet.count}}</div>
+                </figure>
+                <figure>
+                  <a href=""
+                    ><img
+                      style="width: 20px"
+                      class="logo-int"
+                      src="{%static 'heart.png'%}"
+                      alt=""
+                  /></a>
+                  <div class="contador">{{tweet.like.count}}</div>
+                </figure>
+              </div>
+              {%endfor%}           
+            </li>
+              
           </ul>
         </div>
         <section class="barra-3">
