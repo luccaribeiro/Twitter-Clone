@@ -1,7 +1,10 @@
 from django.contrib import admin
-from .models import Profile, Tweet, Like
+
+from .models import Like, Profile, Relationship, Tweet
+
 # Register your models here.
 # admin.site.register(Retweet)
 admin.site.register(Profile)
 admin.site.register(Tweet)
 admin.site.register(Like)
+admin.site.register(Relationship)
