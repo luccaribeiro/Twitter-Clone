@@ -1,5 +1,5 @@
 <title>Twitter</title>
-<h1>nome do usuario: {{request.user.username}}</h1>
+<h1>nome do usuario: {{usuario_perfil.user.username}}</h1>
 <img src="{{ usuario_perfil.avatar.url }}" alt="Avatar" />
 <h3>{{usuario_perfil.nickname}}</h3>
 <p>{{usuario_perfil.bio}}</p>
@@ -11,7 +11,17 @@
   {%endfor%}
 </ul>
 {%if request.user.username != usuario_perfil.user.username%}
-<button>Seguir</button>
-{%else%}
-<a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a>
+  {% if usuario_perfil.user not in request.user.profile.following %}
+      <a href="{% url 'follow' usuario_perfil.user.username%}">Seguir</a> 
+  {% else %}
+      <a href="{% url 'unfollow' usuario_perfil.user.username%}">Deixar de Seguir</a> 
+  {% endif %}
+  {%else%}
+  <a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a>
 {%endif%}
+<p>Seguidores: {{usuario_perfil.followers.count}}  Seguindo: {{usuario_perfil.following.count}}</p>
+<br>
+<h2>Os Tweets dessas pessoas tem que ser exibidos nessa timeline</h2>
+{% for seguidor in seguindo  %}
+<h2>{{seguidor}}</h2>
+{% endfor %}

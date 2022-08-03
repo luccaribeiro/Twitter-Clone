@@ -11,4 +11,6 @@ urlpatterns = [
     path("postagem/<int:id>/", views.postagem, name="postagem"),
     path("retweet/<int:id>/", views.repost, name="retweet"),
     path("like/<int:id>/", views.like, name="like"),
+    path('follow/<str:username>/', views.follow, name='follow'),
+    path('unfollow/<str:username>/', views.unfollow, name='unfollow'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,13 +1,12 @@
-from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from GoogleNews import GoogleNews
+from main.models import Like, Profile, Relationship, Tweet
 
-from main.models import Profile, Tweet, Like
-
-from .forms import ProfileForm, PostForm
+from .forms import PostForm, ProfileForm
 
 googlenews = GoogleNews()
 googlenews = GoogleNews(period="d")
@@ -17,7 +16,8 @@ googlenews.search("Brasil")
 
 def principal(request):
     noticias = googlenews.results()
-    tweets = Tweet.objects.filter(reply_to__isnull=True).order_by('-created_on')
+    tweets = Tweet.objects.filter(
+        reply_to__isnull=True).order_by('-created_on')
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -44,7 +44,8 @@ def principal(request):
 def postagem(request, id):
     noticias = googlenews.results()
     postagem_ref = Tweet.objects.get(id=id)
-    reply_list = Tweet.objects.filter(reply_to=postagem_ref.id).order_by('created_on')
+    reply_list = Tweet.objects.filter(
+        reply_to=postagem_ref.id).order_by('created_on')
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -99,18 +100,23 @@ def repost(request, id):
 
 
 def perfil(request, username):
-    usuario_perfil = Profile.objects.get(user=User.objects.get(username=username).id)
-    postagens = Tweet.objects.filter(user=usuario_perfil.id).filter(reply_to__isnull=True).order_by('-created_on')
+    usuario_perfil = Profile.objects.get(
+        user=User.objects.get(username=username).id)
+    seguindo = usuario_perfil.following
+    postagens = Tweet.objects.filter(user=usuario_perfil.id).filter(
+        reply_to__isnull=True).order_by('-created_on')
 
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
+        "seguindo": seguindo,
     }
     return render(request, "timeline/perfil.html", context)
 
 
 def edit_perfil(request, username):
-    usuario_perfil = Profile.objects.get(user=User.objects.get(username=username).id)
+    usuario_perfil = Profile.objects.get(
+        user=User.objects.get(username=username).id)
     postagens = usuario_perfil.tweets.all()
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES)
@@ -134,9 +140,30 @@ def edit_perfil(request, username):
 
 def like(request, id):
     try:
-        tweet_like = Like(user=Profile.objects.get(user=request.user.id), tweet=Tweet.objects.get(id=id))
+        tweet_like = Like(user=Profile.objects.get(
+            user=request.user.id), tweet=Tweet.objects.get(id=id))
         tweet_like.save()
     except IntegrityError:
-        like_delete = Like.objects.get(user=Profile.objects.get(user=request.user.id), tweet=Tweet.objects.get(id=id))
+        like_delete = Like.objects.get(user=Profile.objects.get(
+            user=request.user.id), tweet=Tweet.objects.get(id=id))
         like_delete.delete()
+    return redirect('timeline_page')
+
+
+def follow(request, username):
+    current_user = request.user
+    to_user = User.objects.get(username=username)
+    to_user_id = to_user
+    rel = Relationship(from_user=current_user, to_user=to_user_id)
+    rel.save()
+    return redirect('timeline_page')
+
+
+def unfollow(request, username):
+    current_user = request.user
+    to_user = User.objects.get(username=username)
+    to_user_id = to_user.id
+    rel = Relationship.objects.get(
+        from_user=current_user.id, to_user=to_user_id)
+    rel.delete()
     return redirect('timeline_page')
