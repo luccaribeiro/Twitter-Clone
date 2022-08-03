@@ -54,7 +54,7 @@
             <li class="cabecalho__menuItem">
               <img
                 class="foto-perfil"
-                src="{{ request.user.profile.avatar.url }}"
+                src="{% static 'profile.png' %}"
                 alt="Perfil"
               />
               <a href="{% url 'perfil' user.username %}">Perfil</a>
