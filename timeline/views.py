@@ -23,8 +23,18 @@ def random_generator(size=15, chars=string.ascii_uppercase + string.digits):
 
 
 def principal(request):
-    tweets = Tweet.objects.filter(
-        reply_to__isnull=True).order_by('-created_on')
+    tweets = []
+    usuario_id = Profile.objects.get(user=request.user.id).id
+    follows_the = Relationship.objects.filter(follower_id=usuario_id)
+    follows = list(follows_the)
+    for user in follows:
+        user_tweets = Tweet.objects.filter(user_id=user.user_id)
+        for tweet in user_tweets:
+            tweets.append(tweet)
+    tweets_list = Tweet.objects.filter(user_id=usuario_id).filter(reply_to__isnull=True).order_by('-created_on')
+    for tweet in list(tweets_list):
+        tweets.append(tweet)
+    tweets.sort(key=lambda x: x.created_on, reverse=True)
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -37,7 +47,6 @@ def principal(request):
             else:
                 messages.warning(request, "Por favor, preencha esse campo.")
                 return redirect("main:timeline_page")
-
     else:
         form = PostForm()
     context = {
