@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import random
 import string
 
-from django.contrib.auth.models import User
-=======
->>>>>>> 880f19f48029416d3db3c057b0a9ffd5111ea913
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import IntegrityError
