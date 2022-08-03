@@ -3,140 +3,158 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}" />
     <title>Perfil</title>
   </head>
   <body>
-      <div class="container">
-        <header>
-          <figure class="logo-twitter">
-            <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
-          </figure>
-          <nav class="cabecalho-menunav">
-            <ul class="cabecalho-menulista">
-              <li>
-                <a href="{% url 'timeline_page' %}"
-                  ><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página
-                  Inicial</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  ><img
-                    src="{%static 'Hashtag.png'%}"
-                    alt="Explorar"
-                  />Explorar</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  ><img
-                    src="{%static 'Notification.png'%}"
-                    alt="Notificações"
-                  />Notificações</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  ><img
-                    src="{%static 'Group.png'%}"
-                    alt="Mensagens"
-                  />Mensagens</a
-                >
-              </li>
-              <li>
-                <a href="">
-                  <img src="{%static 'saved.png'%}" alt="Itens salvos" />Itens
-                  salvos</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  ><img src="{%static 'listas.png'%}" alt="Listas" />Listas</a
-                >
-              </li>
-              <li>
-                <a class="foto-perfil" href="{% url 'perfil' user.username %}"
-                  ><img
-                    src="{{ request.user.profile.avatar.url }}"
-                    alt="Perfil"
-                  />Perfil</a
-                >
-              </li>
-              <li>
-                <a href=""><img src="{%static 'more.png'%}" alt="Mais" />Mais</a>
-              </li>
-            </ul>
-          </nav>
-        </header> 
-        <div class="perfil-tuites">
-          <div class="caixa-perfil">
-            <a class="volta-timeline" href="/timeline/"
+    <div class="container">
+      <header>
+        <figure class="logo-twitter">
+          <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
+        </figure>
+        <nav class="cabecalho-menunav">
+          <ul class="cabecalho-menulista">
+            <li>
+              <a href="{% url 'timeline_page' %}"
+                ><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página
+                Inicial</a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><img
+                  src="{%static 'Hashtag.png'%}"
+                  alt="Explorar"
+                />Explorar</a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><img
+                  src="{%static 'Notification.png'%}"
+                  alt="Notificações"
+                />Notificações</a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><img
+                  src="{%static 'Group.png'%}"
+                  alt="Mensagens"
+                />Mensagens</a
+              >
+            </li>
+            <li>
+              <a href="">
+                <img src="{%static 'saved.png'%}" alt="Itens salvos" />Itens
+                salvos</a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><img src="{%static 'listas.png'%}" alt="Listas" />Listas</a
+              >
+            </li>
+            <li>
+              <a class="foto-perfil" href="{% url 'perfil' user.username %}"
+                ><img
+                  src="{{ request.user.profile.avatar.url }}"
+                  alt="Perfil"
+                />Perfil</a
+              >
+            </li>
+            <li>
+              <a href=""><img src="{%static 'more.png'%}" alt="Mais" />Mais</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="perfil-tuites">
+        <div class="caixa-perfil">
+          <a class="volta-timeline" href="/timeline/"
             ><img src="/static/timeline/seta.png" alt="" />pagina inicial</a
           >
-            <img class="capa" src="{{usuario_perfil.capa.url}}" alt="">
-            <img class="foto-perfil" src="{{ usuario_perfil.avatar.url }}" alt="Avatar" />
-            <div class="infos-basica">
-              <h1>{{request.user.username}}</h1>
-              <h3>@{{usuario_perfil.nickname}}</h3>
-              <p>{{usuario_perfil.bio}}</p>
-            </div>
-            <div class="botoes">
-              {%if request.user.username != usuario_perfil.user.username%}
-              {% if usuario_perfil.user not in request.user.profile.following %}
-                  <button><a class="botao-seguir" href="{% url 'follow' usuario_perfil.user.username%}">Seguir</a> </button>
-              {% else %}
-                  <a href="{% url 'unfollow' usuario_perfil.user.username%}">Deixar de Seguir</a> 
-              {% endif %}
-              {%else%}
-              <a class="edit-perfil" href="{% url 'edit.perfil' user.username %}">Editar Perfil</a>
-            {%endif%}
-            <p>Seguidores: {{usuario_perfil.followers.count}}  Seguindo: {{usuario_perfil.following.count}}</p>
-            </div>
+          <img class="capa" src="{{usuario_perfil.capa.url}}" alt="" />
+          <img
+            class="foto-perfil"
+            src="{{ usuario_perfil.avatar.url }}"
+            alt="Avatar"
+          />
+          <div class="infos-basica">
+            <h1>{{request.user.username}}</h1>
+            <h3>@{{usuario_perfil.nickname}}</h3>
+            <p>{{usuario_perfil.bio}}</p>
           </div>
-          <ul>
-            {%for tweet in postagens%}
-            <li>{{tweet.content}}</li>
-            {%endfor%}
-          </ul>
-        </div>
-        <section class="barra-3">
-          <div id="wrap">
-            <form
-              id="nav-search"
-              class="form-search"
-              action="/search"
-              role="search"
+          <div class="botoes">
+            {%if request.user.username != usuario_perfil.user.username%} {% if
+            usuario_perfil.user not in request.user.profile.following %}
+            <button>
+              <a
+                class="botao-seguir"
+                href="{% url 'follow' usuario_perfil.user.username%}"
+                >Seguir</a
+              >
+            </button>
+            {% else %}
+            <a href="{% url 'unfollow' usuario_perfil.user.username%}"
+              >Deixar de Seguir</a
             >
-              <input
-                id="search-query"
-                class="search-input"
-                type="text"
-                placeholder="Search"
-              />
-              <button class="icon" type="submit"></button>
-            </form>
+            {% endif %} {%else%}
+            <a class="edit-perfil" href="{% url 'edit.perfil' user.username %}"
+              >Editar Perfil</a
+            >
+            {%endif%}
+            <p>
+              Seguidores: {{usuario_perfil.followers.count}} Seguindo:
+              {{usuario_perfil.following.count}}
+            </p>
           </div>
-          <section class="noticias">
-            <h1>O que está acontecendo</h1>
-            {%for noticia in noticias%}
-            <a class="link-noticia" target="_blank" href="{{noticia.link}}">
-              <div class="noticia">
-                <h2>{{noticia.title}}</h2>
-                <br>
-                <p>{{noticia.desc}}</p>
-                <br />
-              </div>
-            </a>
-            {%endfor%}
-          </section>
-        </section>
+        </div>
+        <ul>
+          {%for tweet in postagens%} {%if tweet.num_type == 1 %}
+          <li>{{tweet.content}}</li>
+          <p>{{tweet.retweets_the.content}}</p>
+          {%else%}
+          <li>{{tweet.content}}</li>
+          {%endif%}
+          <br /><br /><br /><br /><br />
+          {%endfor%}
+        </ul>
       </div>
+      <section class="barra-3">
+        <div id="wrap">
+          <form
+            id="nav-search"
+            class="form-search"
+            action="/search"
+            role="search"
+          >
+            <input
+              id="search-query"
+              class="search-input"
+              type="text"
+              placeholder="Search"
+            />
+            <button class="icon" type="submit"></button>
+          </form>
+        </div>
+        <section class="noticias">
+          <h1>O que está acontecendo</h1>
+          {%for noticia in noticias%}
+          <a class="link-noticia" target="_blank" href="{{noticia.link}}">
+            <div class="noticia">
+              <h2>{{noticia.title}}</h2>
+              <br />
+              <p>{{noticia.desc}}</p>
+              <br />
+            </div>
+          </a>
+          {%endfor%}
+        </section>
+      </section>
+    </div>
   </body>
 </html>
-
-
-
