@@ -102,14 +102,12 @@ def repost(request, id):
 def perfil(request, username):
     usuario_perfil = Profile.objects.get(
         user=User.objects.get(username=username).id)
-    seguindo = usuario_perfil.following
     postagens = Tweet.objects.filter(user=usuario_perfil.id).filter(
         reply_to__isnull=True).order_by('-created_on')
 
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
-        "seguindo": seguindo,
     }
     return render(request, "timeline/perfil.html", context)
 

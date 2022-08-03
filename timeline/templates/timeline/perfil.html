@@ -20,8 +20,4 @@
   <a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a>
 {%endif%}
 <p>Seguidores: {{usuario_perfil.followers.count}}  Seguindo: {{usuario_perfil.following.count}}</p>
-<br>
-<h2>Os Tweets dessas pessoas tem que ser exibidos nessa timeline</h2>
-{% for seguidor in seguindo  %}
-<h2>{{seguidor}}</h2>
-{% endfor %}
+
