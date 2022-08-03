@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import IntegrityError
@@ -13,6 +16,10 @@ googlenews = GoogleNews()
 googlenews = GoogleNews(period="d")
 googlenews = GoogleNews(lang="pt", region="BR")
 googlenews.search("Brasil")
+
+
+def random_generator(size=15, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 def principal(request):
@@ -106,13 +113,15 @@ def perfil(request, username):
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
     }
+
     return render(request, "timeline/perfil.html", context)
 
 
 def edit_perfil(request, username):
     usuario_perfil = Profile.objects.get(user=User.objects.get(username=username).id)
-    postagens = usuario_perfil.tweets.all()
+    postagens = Tweet.objects.filter(user_id=usuario_perfil.id).order_by('-created_on')
     if request.method == "POST":
+        usuario_perfil.nickname = random_generator()
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
@@ -123,7 +132,12 @@ def edit_perfil(request, username):
             usuario_perfil.save()
             return redirect(reverse("perfil", args=[usuario_perfil.user.username]))
     else:
-        form = ProfileForm()
+        form = ProfileForm(initial={
+            'nickname': usuario_perfil.nickname,
+            'avatar': usuario_perfil.avatar,
+            'capa': usuario_perfil.capa,
+            'bio': usuario_perfil.bio
+        })
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,

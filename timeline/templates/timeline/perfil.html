@@ -5,8 +5,12 @@
 <p>{{usuario_perfil.bio}}</p>
 <h2>Lista de Tweets</h2>
 <ul>
-  {%for tweet in postagens%}
+  {%for tweet in postagens%} {%if tweet.num_type == 1 %}
   <li>{{tweet.content}}</li>
+  <p>{{tweet.retweets_the.content}}</p>
+  {%else%}
+  <li>{{tweet.content}}</li>
+  {%endif%}
   <br /><br /><br /><br /><br />
   {%endfor%}
 </ul>
