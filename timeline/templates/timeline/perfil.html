@@ -86,8 +86,8 @@
             </div>
             <p class="calendario"><img src="{% static 'calendario-perfil.png' %}" alt=""> ingressou em (ADICIONAR MES E ANO)</p>
             <div class="seguidores">
-              <p><span>100</span> seguindo</p>  
-              <p><span>100</span> seguidores</p>   
+              <p><span>{{seguindo}}</span> seguindo</p>
+              <p><span>{{seguidores}}</span> seguidores</p>
             </div>
             <ul class="menu">
               <li>Tweets</li>
@@ -105,7 +105,6 @@
               {%else%}
               <button class="edit-perfil"><a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a></button>
               {%endif%}
-              <p>Seguidores: {{usuario_perfil.followers.count}}  Seguindo: {{usuario_perfil.following.count}}</p>
             </div>
           </div>
           <ul class="conteudo-listatuites">
@@ -122,7 +121,13 @@
                 <span class="nickname">@{{tweet.user.nickname}}</span>
                 <span class="criado"> {{tweet.created_on | naturaltime}}</span>
               </div>
-              <div class="texto-tuite">{{tweet.content}}</div>
+              {%if tweet.num_type == 1 %}
+              <div class="texto-tuite">{{tweet.content}}
+                <p>{{tweet.retweets_the.content}}</p>
+              </div>
+              {%else%}
+              <div class="texto-tuite">{{tweet.content}}
+              {%endif%}
               <div class="interacao">
                 <figure>
                   <a href=""
@@ -154,7 +159,7 @@
                   <div class="contador">{{tweet.like.count}}</div>
                 </figure>
               </div>
-              {%endfor%}           
+              {%endfor%}
             </li>
               
           </ul>
@@ -167,23 +172,8 @@
               action="/search"
               role="search"
             >
-            {%endif%}
-            <p>
-              Seguidores: {{usuario_perfil.followers.count}} Seguindo:
-              {{usuario_perfil.following.count}}
-            </p>
           </div>
         </div>
-        <ul>
-          {%for tweet in postagens%} {%if tweet.num_type == 1 %}
-          <li>{{tweet.content}}</li>
-          <p>{{tweet.retweets_the.content}}</p>
-          {%else%}
-          <li>{{tweet.content}}</li>
-          {%endif%}
-          <br /><br /><br /><br /><br />
-          {%endfor%}
-        </ul>
       </div>
       <section class="barra-3">
         <div id="wrap">
