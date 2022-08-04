@@ -121,7 +121,9 @@ border-radius: 50%;
   width: 621px;
 }
 
-.botoes > .edit-perfil{
+.botoes > .edit-perfil, 
+.botoes > .botao-seguir,
+.botoes > .botao-unfollow{
     position: absolute;
     top: 28.5%;
     left: 51.5%;

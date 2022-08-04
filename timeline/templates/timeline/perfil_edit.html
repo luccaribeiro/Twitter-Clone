@@ -1,17 +1,27 @@
-<title>Twitter</title>
-<h1>EDIÇÃO</h1>
-<form method="POST" enctype="multipart/form-data" id="perfil_edit">
-  {% csrf_token %}{{ form.as_p }}
-  <button type="submit">Salvar Perfil</button>
-</form>
-<h2>Lista de Tweets</h2>
-<ul>
-  {%for tweet in postagens%}{% if tweet.num_type == 1 %}
-  <li>{{tweet.content}}</li>
-  <p>{{tweet.retweets_the.content}}</p>
-  {%else%}
-  <li>{{tweet.content}}</li>
-  {%endif%}
-  <br /><br /><br /><br /><br />
-  {%endfor%}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar perfil</title>
+</head>
+  <body>
+    <h1>EDIÇÃO</h1>
+    <form method="POST" enctype="multipart/form-data" id="perfil_edit">
+      {% csrf_token %}{{ form.as_p }}
+      <button type="submit">Salvar Perfil</button>
+    </form>
+    <h2>Lista de Tweets</h2>
+    <ul>
+      {%for tweet in postagens%}{% if tweet.num_type == 1 %}
+      <li>{{tweet.content}}</li>
+      <p>{{tweet.retweets_the.content}}</p>
+      {%else%}
+      <li>{{tweet.content}}</li>
+      {%endif%}
+      <br /><br /><br /><br /><br />
+      {%endfor%}
+    </ul>    
+  </body>
+</html>

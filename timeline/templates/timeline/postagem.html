@@ -1,72 +1,6 @@
-{%load static%} {% load humanize %} {%load static%} {% load humanize %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="{%static 'reset.css'%}" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'timeline/css/postagem.css' %}" />
-    <title>Twitter</title>
-  </head>
-  <body>
-    <div class="container">
-      <!-- CABEÇALHO -->
-      <header class="cabecalho">
-        <figure class="cabecalho__logo">
-          <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
-        </figure>
-
-        <!-- MENU DE NAVEGAÇÃO -->
-        <nav class="cabecalho__menuNavegacao">
-          <!-- LISTA DE LINKS -->
-          <ul class="cabecalho__menuLista">
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Home.png'%}" alt="Página Inicial" />
-              <a href="{% url 'timeline_page' %}">Página Inicial</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Hashtag.png'%}" alt="Explorar" />
-              <a href="">Explorar</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Notification.png'%}" alt="Notificações" />
-              <a href="">Notificações</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'Group.png'%}" alt="Mensagens" />
-              <a href="">Mensagens</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'saved.png'%}" alt="Itens salvos" />
-              <a href="">Itens salvos</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'listas.png'%}" alt="Listas" />
-              <a href="">Listas</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img
-                class="foto-perfil"
-                src="{% static 'profile.png' %}"
-                alt="Perfil"
-              />
-              <a href="{% url 'perfil' user.username %}">Perfil</a>
-            </li>
-
-            <li class="cabecalho__menuItem">
-              <img src="{%static 'more.png'%}" alt="Mais" />
-              <a href="">Mais</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+ {% extends 'timeline/base.html' %}{%load static%} {% load humanize %}
+      
+      {% block conteudo %}
       <main class="conteudoPrincipal">
         <!-- TÍTULO -->
         <h3 class="conteudoPrincipal__titulo">
@@ -210,35 +144,7 @@
           </ul>
         </section>
       </main>
-      <section class="barra-3">
-        <div id="wrap">
-          <form
-            id="nav-search"
-            class="form-search"
-            action="/search"
-            role="search"
-          >
-            <input
-              id="search-query"
-              class="search-input"
-              type="text"
-              placeholder="Search"
-            />
-            <button class="icon" type="submit"></button>
-          </form>
-        </div>
-        <section class="noticias">
-          <h1>O que está acontecendo</h1>
-          {%for noticia in noticias%}
-          <a class="link-noticia" href="{{noticia.link}}">
-            <div class="noticia">
-              <h2>{{noticia.title}}</h2>
-              <br />
-            </div>
-          </a>
-          {%endfor%}
-        </section>
-      </section>
-    </div>
-  </body>
-</html>
+      {% endblock %}
+      
+      
+      

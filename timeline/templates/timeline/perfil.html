@@ -1,4 +1,4 @@
-{%load static%} {% load humanize %}
+ {% extends 'timeline/base.html' %}{%load static%} {% load humanize %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}" />
+    
     <title>Perfil</title>
   </head>
   <body>
@@ -100,7 +100,7 @@
               {% if usuario_perfil.user not in request.user.profile.following %}
                   <button><a class="botao-seguir" href="{% url 'follow' usuario_perfil.user.username%}">Seguir</a></button>
               {% else %}
-                  <a href="{% url 'unfollow' usuario_perfil.user.username%}">Deixar de Seguir</a> 
+                  <button class="botao-unfollow"><a href="{% url 'unfollow' usuario_perfil.user.username%}">Deixar de Seguir</a> </button>
               {% endif %}
               {%else%}
               <button class="edit-perfil"><a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a></button>
