@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}" />
     <title>Perfil</title>
   </head>
   <body>
@@ -167,32 +167,55 @@
               action="/search"
               role="search"
             >
-              <input
-                id="search-query"
-                class="search-input"
-                type="text"
-                placeholder="Search"
-              />
-              <button class="icon" type="submit"></button>
-            </form>
+            {%endif%}
+            <p>
+              Seguidores: {{usuario_perfil.followers.count}} Seguindo:
+              {{usuario_perfil.following.count}}
+            </p>
           </div>
-          <section class="noticias">
-            <h1>O que está acontecendo</h1>
-            {%for noticia in noticias%}
-            <a class="link-noticia" target="_blank" href="{{noticia.link}}">
-              <div class="noticia">
-                <h2>{{noticia.title}}</h2>
-                <br>
-                <p>{{noticia.desc}}</p>
-                <br />
-              </div>
-            </a>
-            {%endfor%}
-          </section>
-        </section>
+        </div>
+        <ul>
+          {%for tweet in postagens%} {%if tweet.num_type == 1 %}
+          <li>{{tweet.content}}</li>
+          <p>{{tweet.retweets_the.content}}</p>
+          {%else%}
+          <li>{{tweet.content}}</li>
+          {%endif%}
+          <br /><br /><br /><br /><br />
+          {%endfor%}
+        </ul>
       </div>
+      <section class="barra-3">
+        <div id="wrap">
+          <form
+            id="nav-search"
+            class="form-search"
+            action="/search"
+            role="search"
+          >
+            <input
+              id="search-query"
+              class="search-input"
+              type="text"
+              placeholder="Search"
+            />
+            <button class="icon" type="submit"></button>
+          </form>
+        </div>
+        <section class="noticias">
+          <h1>O que está acontecendo</h1>
+          {%for noticia in noticias%}
+          <a class="link-noticia" target="_blank" href="{{noticia.link}}">
+            <div class="noticia">
+              <h2>{{noticia.title}}</h2>
+              <br />
+              <p>{{noticia.desc}}</p>
+              <br />
+            </div>
+          </a>
+          {%endfor%}
+        </section>
+      </section>
+    </div>
   </body>
 </html>
-
-
-

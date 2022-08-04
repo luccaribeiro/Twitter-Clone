@@ -18,12 +18,12 @@ class Profile(models.Model):
                              upload_to="background_images")
 
     def following(self):
-        user_ids = Relationship.objects.filter(from_user=self.user)\
+        user_ids = Relationship.objects.filter(follower=self.user)\
             .values_list('to_user_id', flat=True)
         return User.objects.filter(id__in=user_ids)
 
     def followers(self):
-        user_ids = Relationship.objects.filter(to_user=self.user)\
+        user_ids = Relationship.objects.filter(user=self.user)\
             .values_list('from_user_id', flat=True)
         return User.objects.filter(id__in=user_ids)
 
@@ -57,7 +57,6 @@ class Like(models.Model):
     tweet = models.ForeignKey(
         Tweet, on_delete=models.CASCADE, related_name="like")
     date = models.DateTimeField(default=timezone.now)
-#    count = models.BooleanField(default=False)
 
     class Meta:
         unique_together = [["user", "tweet"]]
@@ -68,10 +67,12 @@ class Like(models.Model):
 
 
 class Relationship(models.Model):
-    from_user = models.ForeignKey(
-        User, related_name='relationships', on_delete=models.CASCADE)
-    to_user = models.ForeignKey(
-        User, related_name='related_to', on_delete=models.CASCADE)
+    follower = models.ForeignKey(
+        Profile, related_name='relationships', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        Profile, related_name='related_to', on_delete=models.CASCADE)
+
+#   Adicionar um unique_together aqui ?
 
     def __str__(self):
-        return f'{self.from_user} to {self.to_user}'
+        return f'{self.follower} segue {self.user}'
