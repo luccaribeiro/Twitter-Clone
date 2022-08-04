@@ -120,11 +120,15 @@ def perfil(request, username):
         user=User.objects.get(username=username).id)
     postagens = Tweet.objects.filter(user=usuario_perfil.id).filter(
         reply_to__isnull=True).order_by('-created_on')
+    seguidores = Relationship.objects.filter(follower_id=usuario_perfil.id).count()
+    seguindo = Relationship.objects.filter(user_id=usuario_perfil.id).count()
 
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
         "noticias": noticias,
+        "seguidores": seguidores,
+        "seguindo": seguindo
     }
 
     return render(request, "timeline/perfil.html", context)
