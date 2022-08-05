@@ -10,6 +10,20 @@
     <link rel="stylesheet" href="{% static 'timeline/css/repost.css' %}" />
     <link rel="stylesheet" href="{% static 'timeline/css/postagem.css' %}" />
     <link rel="stylesheet" href="{% static '/timeline/css/perfil.css' %}" />
+    <!-- Daqui pra baixo a Laura vai morrer -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <!-- Especificamente nessa parte a cima -->
     <title>Twitter</title>
   </head>
   <body>
@@ -20,7 +34,7 @@
           <img src="{%static 'bird.png'%}" alt="Logo Ken-Te-Vi" />
         </figure>
         <nav class="cabecalho-menunav">
-                    <ul class="cabecalho-menulista">
+          <ul class="cabecalho-menulista">
             <li>
               <a href="{% url 'timeline_page' %}"
                 ><img src="{%static 'Home.png'%}" alt="Página Inicial" />Página
@@ -80,12 +94,10 @@
           </ul>
         </nav>
       </header>
-      
+
       <div class="conteudo-principal">
-        {% block conteudo %}
-        {% endblock conteudo %}
+        {% block conteudo %} {% endblock conteudo %}
       </div>
-      
 
       <!-- ----- api de noticiais ------- -->
       <section class="barra-3">
@@ -111,7 +123,7 @@
           <a class="link-noticia" target="_blank" href="{{noticia.link}}">
             <div class="noticia">
               <h2>{{noticia.title}}</h2>
-              <br>
+              <br />
               <p>{{noticia.desc}}</p>
               <br />
             </div>
