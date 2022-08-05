@@ -123,7 +123,7 @@ def perfil(request, username):
 
     seguindo = Relationship.objects.filter(follower_id=usuario_perfil.id).count()
     seguidores = Relationship.objects.filter(user_id=usuario_perfil.id).count()
-    deixar_de_seguir = Relationship.objects.filter(follower=usuario_logado.id, user=usuario_perfil).exists()
+    deixar_de_seguir = Relationship.objects.filter(follower=usuario_logado, user=usuario_perfil).exists()
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
