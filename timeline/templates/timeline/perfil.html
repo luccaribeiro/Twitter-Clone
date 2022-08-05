@@ -8,7 +8,7 @@
             <img class="capa" src="{{usuario_perfil.capa.url}}" alt="">
             <img class="foto-perfil" src="{{ usuario_perfil.avatar.url }}" alt="Avatar" />
             <div class="infos-basica">
-              <h1>{{request.user.username}}</h1>
+              <h1>{{usuario_perfil.user.username}}</h1>
               <h3>@{{usuario_perfil.nickname}}</h3>
               <p>{{usuario_perfil.bio}}</p>
             </div>
@@ -24,14 +24,12 @@
               <li>Curtidas</li>
             </ul>
             <div class="botoes">
-              {%if request.user.username != usuario_perfil.user.username%}
-              {% if usuario_perfil.user not in request.user.profile.following %}
-                  <button><a class="botao-seguir" href="{% url 'follow' usuario_perfil.user.username%}">Seguir</a></button>
-              {% else %}
-                  <button class="botao-unfollow"><a href="{% url 'unfollow' usuario_perfil.user.username%}">Deixar de Seguir</a> </button>
-              {% endif %}
-              {%else%}
+              {% if request.user.username == usuario_perfil.user.username %}
               <button class="edit-perfil"><a href="{% url 'edit.perfil' user.username %}">Editar Perfil</a></button>
+              {% elif deixar_de_seguir %}
+              <button class="botao-unfollow"><a href="{% url 'unfollow' usuario_perfil.user.username%}">Deixar de Seguir</a> </button>
+              {% else %}
+              <button><a class="botao-seguir" href="{% url 'follow' usuario_perfil.user.username%}">Seguir</a></button>
               {%endif%}
             </div>
           </div>

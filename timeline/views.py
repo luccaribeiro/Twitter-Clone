@@ -4,6 +4,7 @@ import string
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from GoogleNews import GoogleNews
@@ -22,26 +23,24 @@ def random_generator(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
+def get_tweets(user_id):
+    return Tweet.objects.filter(
+        Q(user_id=user_id) | Q(
+            user__id__in=Relationship.objects.filter(user_id=user_id).values_list('follower_id', flat=True)
+        )
+    ).order_by('-created_on')
+
+
 def principal(request):
-    tweets = []
-    usuario_id = Profile.objects.get(user=request.user.id).id
-    follows_the = Relationship.objects.filter(follower_id=usuario_id)
-    follows = list(follows_the)
-    for user in follows:
-        user_tweets = Tweet.objects.filter(user_id=user.user_id)
-        for tweet in user_tweets:
-            tweets.append(tweet)
-    tweets_list = Tweet.objects.filter(user_id=usuario_id).filter(reply_to__isnull=True).order_by('-created_on')
-    for tweet in list(tweets_list):
-        tweets.append(tweet)
-    tweets.sort(key=lambda x: x.created_on, reverse=True)
+    user_profile = Profile.objects.get(user=request.user)
+    tweets = get_tweets(user_profile)
 
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             if post.content:
-                post.user_id = Profile.objects.get(user=request.user.id).id
+                post.user_id = request.user.profile.id
                 post.save()
                 return redirect("main:timeline_page")
             else:
@@ -67,7 +66,7 @@ def postagem(request, id):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user_id = int(Profile.objects.get(user=request.user.id).id)
+            post.user_id = request.user.profile.id
             post.reply_to_id = id
             post.num_type = 2
             if post.content:
@@ -100,7 +99,7 @@ def repost(request, id):
         form = PostForm(request.POST)
         if form.is_valid():
             rt = form.save(commit=False)
-            rt.user_id = Profile.objects.get(user_id=request.user.id).id
+            rt.user_id = request.user.profile.id
             rt.num_type = 1
             rt.retweets_the_id = id
             rt.save()
@@ -116,19 +115,23 @@ def repost(request, id):
 
 
 def perfil(request, username):
-    usuario_perfil = Profile.objects.get(
-        user=User.objects.get(username=username).id)
+    usuario_logado = request.user.profile.id
+    usuario_perfil = Profile.objects.get(user=User.objects.get(username=username).id)
+
     postagens = Tweet.objects.filter(user=usuario_perfil.id).filter(
         reply_to__isnull=True).order_by('-created_on')
-    seguidores = Relationship.objects.filter(follower_id=usuario_perfil.id).count()
-    seguindo = Relationship.objects.filter(user_id=usuario_perfil.id).count()
 
+    seguindo = Relationship.objects.filter(follower_id=usuario_perfil.id).count()
+    seguidores = Relationship.objects.filter(user_id=usuario_perfil.id).count()
+    deixar_de_seguir = Relationship.objects.filter(follower=usuario_logado.id, user=usuario_perfil).exists()
     context = {
         "postagens": postagens,
         "usuario_perfil": usuario_perfil,
         "noticias": noticias,
         "seguidores": seguidores,
-        "seguindo": seguindo
+        "seguindo": seguindo,
+        "deixar_de_seguir": deixar_de_seguir,
+        "usuario_logado": usuario_logado
     }
 
     return render(request, "timeline/perfil.html", context)
@@ -140,14 +143,9 @@ def edit_perfil(request, username):
     postagens = Tweet.objects.filter(user_id=usuario_perfil.id).order_by('-created_on')
     if request.method == "POST":
         usuario_perfil.nickname = random_generator()
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=usuario_perfil)
         if form.is_valid():
-            post = form.save(commit=False)
-            usuario_perfil.nickname = post.nickname
-            usuario_perfil.avatar = post.avatar
-            usuario_perfil.capa = post.capa
-            usuario_perfil.bio = post.bio
-            usuario_perfil.save()
+            form.save()
             return redirect(reverse("perfil", args=[usuario_perfil.user.username]))
     else:
         form = ProfileForm(initial={
