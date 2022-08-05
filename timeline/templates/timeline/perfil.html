@@ -12,7 +12,7 @@
               <h3>@{{usuario_perfil.nickname}}</h3>
               <p>{{usuario_perfil.bio}}</p>
             </div>
-            <p class="calendario"><img src="{% static 'calendario-perfil.png' %}" alt=""> ingressou em (ADICIONAR MES E ANO)</p>
+            <p class="calendario"><img src="{% static 'calendario-perfil.png' %}" alt=""> ingressou em {{request.user.date_joined | naturalday}}</p>
             <div class="seguidores">
               <p><span>{{seguindo}}</span> seguindo</p>
               <p><span>{{seguidores}}</span> seguidores</p>
