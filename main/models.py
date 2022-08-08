@@ -89,6 +89,7 @@ class Notification(models.Model):
                                related_name='autor_da_interacao',
                                null=True, blank=True)
     notification_type = models.CharField(max_length=20, default='curtiu seu tweet')
+    created_on = models.DateTimeField(default=timezone.now)
     viewed = models.BooleanField(default=False)
 
     def __str__(self):

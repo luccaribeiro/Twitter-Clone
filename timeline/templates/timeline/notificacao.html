@@ -4,7 +4,7 @@
         <h3 class="conteudo-titulo">Notificações</h3>
         <!-- FORMULÁRIO -->
         <div class="caixa-tuite">
-          <a href="/perfil/lauranascimento/">  <img
+          <a href="{% url 'perfil' request.user.username %}">  <img
             class="tuiteimagem-perfil"
             src="{{ request.user.profile.avatar.url }}"
             alt="Imagem"
@@ -33,6 +33,17 @@
             {%for notificacao in notificacoes%}
             <!-- Tweet indivual -->
             <li class="conteudo-tuite">
+              {% if notificacao.notification_type == 'agora segue você!' %}
+              <div class="img-time">
+               <img width="60px"  src="{{ notificacao.author.avatar.url }}" alt="Imagem" />
+               <a href="{% url 'perfil' notificacao.author %}"
+                 ><h2>{{notificacao.author}}</h2>
+               </a>
+               <span class="nickname">@{{notificacao.author.nickname}}</span>
+             </div>
+             <div class="texto-tuite">{{notificacao.author}} {{notificacao.notification_type}}</div>
+             </a>
+              {% else %}
               <a href="{% url 'postagem' notificacao.tweet_ref.id  %}">
               <!-- foto perfil -->
                <div class="img-time">
@@ -44,6 +55,7 @@
               </div>
               <div class="texto-tuite">{{notificacao.author}} {{notificacao.notification_type}} {{notificacao.tweet_ref.content}}</div>
               </a>
+              {%endif%}
             </li>
             {%endfor%}
           </ul>

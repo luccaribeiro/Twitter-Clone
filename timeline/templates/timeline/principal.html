@@ -4,7 +4,7 @@
         <h3 class="conteudo-titulo">Página inicial</h3>
         <!-- FORMULÁRIO -->
         <div class="caixa-tuite">
-          <a href="/perfil/lauranascimento/">  <img
+          <a href="{% url 'perfil' request.user.username %}">  <img
             class="tuiteimagem-perfil"
             src="{{ request.user.profile.avatar.url }}"
             alt="Imagem"
@@ -51,7 +51,7 @@
                   alt="{{tweet.retweets_the.user.user.username}}"
                 />
                 <div>
-                  <a href="">{{tweet.retweets_the.user.user.username}}</a>
+                  <a href="{% url 'perfil' tweet.retweets_the.user.user.username %}">{{tweet.retweets_the.user.user.username}}</a>
                   <span class="nickname-retuite">@{{tweet.user.nickname}}</span>
                   <span> {{tweet.created_on | naturaltime}}</span>
                 </div>

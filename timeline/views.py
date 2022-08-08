@@ -207,7 +207,7 @@ def notification_viewed(request):
 
 
 def open_notification(request):
-    notificacoes = Notification.objects.filter(user=request.user.profile)
+    notificacoes = Notification.objects.filter(user=request.user.profile).order_by('-created_on')
     context = {
         'notificacoes': notificacoes
     }
@@ -215,19 +215,16 @@ def open_notification(request):
 
 
 def follow(request, username):
-    current_user = request.user
-    to_user = User.objects.get(username=username)
-    to_user_id = to_user
-    rel = Relationship(from_user=current_user, to_user=to_user_id)
-    rel.save()
+    current_user = request.user.profile
+    to_user = User.objects.get(username=username).profile
+    Relationship(follower=current_user, user=to_user).save()
+    Notification.objects.create(user=to_user, author=request.user.profile, notification_type='agora segue você!')
     return redirect('timeline_page')
 
 
 def unfollow(request, username):
-    current_user = request.user
-    to_user = User.objects.get(username=username)
-    to_user_id = to_user.id
-    rel = Relationship.objects.get(
-        from_user=current_user.id, to_user=to_user_id)
-    rel.delete()
+    current_user = request.user.profile
+    to_user = User.objects.get(username=username).profile
+    Relationship.objects.get(
+        follower=current_user.id, user=to_user).delete()
     return redirect('timeline_page')
