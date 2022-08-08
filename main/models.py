@@ -1,10 +1,14 @@
+import random
+import string
+
 from django.db import models
 from django.utils import timezone
 
 from .forms import User
-from .views import random_generator
 
-# Create your models here.
+
+def random_generator(size=15, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 class Profile(models.Model):
@@ -76,3 +80,16 @@ class Relationship(models.Model):
 
     def __str__(self):
         return f'{self.follower} segue {self.user}'
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='user_logado')
+    tweet_ref = models.ForeignKey(Tweet, on_delete=models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE,
+                               related_name='autor_da_interacao',
+                               null=True, blank=True)
+    notification_type = models.CharField(max_length=20, default='curtiu seu tweet')
+    viewed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.author} {self.notification_type} {self.tweet_ref}'

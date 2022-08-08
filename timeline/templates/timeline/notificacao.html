@@ -1,0 +1,52 @@
+{% extends 'timeline/base.html' %} {%load static%} {% load humanize %} 
+
+        {% block conteudo %}
+        <h3 class="conteudo-titulo">Notificações</h3>
+        <!-- FORMULÁRIO -->
+        <div class="caixa-tuite">
+          <a href="/perfil/lauranascimento/">  <img
+            class="tuiteimagem-perfil"
+            src="{{ request.user.profile.avatar.url }}"
+            alt="Imagem"
+          /></a>
+        
+          <form class="conteudo-formulario" method="post">
+            {% csrf_token %} {{ form.content }}
+            <p class="borda-caixatt"></p>
+            <button class="tuite" type="submit">Tweetar</button>
+            <p class="borda-tuitar"></p>
+            {% if messages %} {% for message in messages %}
+            <p
+              class="messages"
+              style="color: red; position: absolute; top: 23%; left: 37%"
+            >
+              {{message}}
+            </p>
+            {% endfor %} {% endif %}
+          </form>
+        </div>
+
+        <!-- FEED -->
+        <section class="conteudo-feed">
+          <!-- LISTA para os tweets -->
+          <ul class="conteudo-listatuites">
+            {%for notificacao in notificacoes%}
+            <!-- Tweet indivual -->
+            <li class="conteudo-tuite">
+              <a href="{% url 'postagem' notificacao.tweet_ref.id  %}">
+              <!-- foto perfil -->
+               <div class="img-time">
+                <img width="60px"  src="{{ notificacao.author.avatar.url }}" alt="Imagem" />
+                <a href="{% url 'perfil' notificacao.author %}"
+                  ><h2>{{notificacao.author}}</h2>
+                </a>
+                <span class="nickname">@{{notificacao.author.nickname}}</span>
+              </div>
+              <div class="texto-tuite">{{notificacao.author}} {{notificacao.notification_type}} {{notificacao.tweet_ref.content}}</div>
+              </a>
+            </li>
+            {%endfor%}
+          </ul>
+        </section>
+      </main>
+      {% endblock conteudo %}

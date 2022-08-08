@@ -81,22 +81,40 @@
                   <div class="contador">{{tweet.retweet.count}}</div>
                 </figure>
                 <figure>
-                  <a href="{% url 'like' tweet.id %}"
-                    ><img
-                      style="width: 20px"
-                      class="logo-int"
-                      src="{%static 'heart.png'%}"
-                      alt=""
-                  /></a>
-                  <div class="contador">{{tweet.like.count}}</div>
+                  <button
+                  class="{% if tweet in likes_count %}like{% endif %}"
+                  type="submit"
+                  onclick="like({{ tweet.id }})"
+                  id="like_{{ tweet.id }}"
+                  >
+                    <i class="fa-solid fa-heart"></i>
+                  </button>
+                  <div id="likes_count_{{tweet.id}}" class="contador">{{tweet.like.count}}</div>
                 </figure>
               </div>
-              <!-- <p>
-                <a href="{%url 'postagem' tweet.id %}">{{tweet.content}}</a>
-              </p> -->
             </li>
             {%endfor%}
           </ul>
         </section>
       </main>
       {% endblock conteudo %}
+      {% block js %}
+      {{ block.super }}
+      <script>
+        function like(idTweet){
+          fetch("/like/" + idTweet)
+            .then((response)=> response.json())
+            .then((resposta)=>{
+              if(resposta.like){
+                document.getElementById(`like_${idTweet}`).classList.add("like")
+              } else {
+                document.getElementById(`like_${idTweet}`).classList.remove("like")
+              }
+              document.getElementById(`likes_count_${idTweet}`).innerHTML = resposta.likes_count
+            })
+            .catch((error) =>{
+              console.log(error)
+            })
+        }
+      </script>
+      {% endblock js %}
