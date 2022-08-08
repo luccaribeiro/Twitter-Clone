@@ -1,14 +1,12 @@
-import random
-import string
-
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.db.models import Q
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render, reverse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from GoogleNews import GoogleNews
-from main.models import Like, Profile, Relationship, Tweet
+
+from main.models import Like, Profile, Relationship, Tweet, Notification
 
 from .forms import PostForm, ProfileForm
 
@@ -17,10 +15,6 @@ googlenews = GoogleNews(period='d')
 googlenews = GoogleNews(lang='pt', region='BR')
 googlenews.search('BRASIL')
 noticias = googlenews.results()
-
-
-def random_generator(size=15, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
 
 
 def get_tweets(user_id):
@@ -71,6 +65,11 @@ def postagem(request, id):
             post.num_type = 2
             if post.content:
                 post.save()
+                Notification.objects.create(user=postagem_ref.user,
+                                            tweet_ref=postagem_ref,
+                                            author=request.user.profile,
+                                            notification_type='respondeu seu tweet')
+
                 return HttpResponseRedirect(request.path_info)
             else:
                 messages.warning(request, "Por favor, preencha esse campo.")
@@ -103,6 +102,10 @@ def repost(request, id):
             rt.num_type = 1
             rt.retweets_the_id = id
             rt.save()
+            Notification.objects.create(user=ref_tweet.user,
+                                        tweet_ref=ref_tweet,
+                                        author=request.user.profile,
+                                        notification_type='retweetou seu tweet')
             return redirect('timeline_page')
     else:
         form = PostForm()
@@ -142,7 +145,6 @@ def edit_perfil(request, username):
         user=User.objects.get(username=username).id)
     postagens = Tweet.objects.filter(user_id=usuario_perfil.id).order_by('-created_on')
     if request.method == "POST":
-        usuario_perfil.nickname = random_generator()
         form = ProfileForm(request.POST, request.FILES, instance=usuario_perfil)
         if form.is_valid():
             form.save()
@@ -162,16 +164,54 @@ def edit_perfil(request, username):
     return render(request, "timeline/perfil_edit.html", context)
 
 
-def like(request, id):
+# def like(request, id):
+#     try:
+#         tweet_like = Like(user=Profile.objects.get(
+#             user=request.user.id), tweet=Tweet.objects.get(id=id))
+#         tweet_like.save()
+#     except IntegrityError:
+#         like_delete = Like.objects.get(user=Profile.objects.get(
+#             user=request.user.id), tweet=Tweet.objects.get(id=id))
+#         like_delete.delete()
+#     return redirect('timeline_page')
+
+
+def api_like(request, id):
+    tweet_like = get_object_or_404(Tweet, id=id)
     try:
-        tweet_like = Like(user=Profile.objects.get(
-            user=request.user.id), tweet=Tweet.objects.get(id=id))
-        tweet_like.save()
+        Like.objects.create(user=request.user.profile, tweet=tweet_like)
+        Notification.objects.create(user=tweet_like.user, tweet_ref=tweet_like, author=request.user.profile)
+        resposta = {
+            'like': True
+        }
     except IntegrityError:
-        like_delete = Like.objects.get(user=Profile.objects.get(
-            user=request.user.id), tweet=Tweet.objects.get(id=id))
-        like_delete.delete()
-    return redirect('timeline_page')
+        Like.objects.get(user=request.user.profile, tweet=tweet_like).delete()
+        resposta = {
+            'like': False
+        }
+    resposta['likes_count'] = tweet_like.like.count()
+    return JsonResponse(resposta)
+
+
+def notifications(request):
+    return JsonResponse(
+        {
+            'alerts': Notification.objects.filter(user=request.user.profile, viewed=False).count()
+        }
+    )
+
+
+def notification_viewed(request):
+    Notification.objects.filter(user=request.user.profile, viewed=False).update(viewed=True)
+    return redirect('open_notification')
+
+
+def open_notification(request):
+    notificacoes = Notification.objects.filter(user=request.user.profile)
+    context = {
+        'notificacoes': notificacoes
+    }
+    return render(request, 'timeline/notificacao.html', context)
 
 
 def follow(request, username):

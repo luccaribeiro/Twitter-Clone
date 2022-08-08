@@ -24,6 +24,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
     />
     <!-- Especificamente nessa parte acima -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
+      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
+      crossorigin="anonymous"
+    ></script>
     <title>Twitter</title>
   </head>
   <body>
@@ -52,12 +58,15 @@
             </li>
 
             <li>
-              <a href=""
-                ><img
-                  src="{%static 'Notification.png'%}"
-                  alt="Notificações"
-                />Notificações</a
-              >
+              <a href="{% url 'open_notification' %}">
+                <button onclick="see_notifications()">
+                  <img
+                    src="{%static 'Notification.png'%}"
+                    alt="Notificações"
+                  />Notificações
+                </button>
+                <span id="notificacao"></span>
+              </a>
             </li>
 
             <li>
@@ -132,5 +141,22 @@
         </section>
       </section>
     </div>
+    {% block js %}
+    <script>
+      function notifications() {
+        fetch("/notifications/")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("notificacao").innerHTML = data.alerts;
+            setTimeout(notifications, 1000);
+          });
+      }
+      notifications();
+
+      function see_notifications() {
+        fetch("/see_notifications/");
+      }
+    </script>
+    {% endblock js %}
   </body>
 </html>
